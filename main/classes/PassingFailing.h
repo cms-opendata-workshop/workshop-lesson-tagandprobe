@@ -70,11 +70,6 @@ private:
 		//Variable bin for eta
 		else if (strcmp(quantityName, "Eta") == 0)
 		{
-			/*
-			double xbins [] = {-2.4,-2.,-1.6,-1.2,-0.8,-0.4, 0., 0.4, 0.8, 1.2, 1.6, 2., 2.4};
-			int nbins = sizeof(xbins)/sizeof(*xbins) - 1;
-			*/
-
 			double xbins[10000];
 			xbins[0] = .5;
 			int nbins = 0;
@@ -102,22 +97,11 @@ private:
 				rxbins[entry] = xbins[i];
 				entry++;
 			}
-
-			/*
-			//DEBUG
-			cout << "---------------------------------" << endl;
-			for (int i = 0; i < entry; i++)
-			{
-				cout << "[" << i << "] = " << rxbins[i] << endl;
-			}
-			*/
-
-
 			
 			histo = new TH1D(hName.data(), hTitle.data(), entry-1, rxbins);
 		}
 
-		//Histograms with no variable bin
+		//Bins for phi 
 		else
 		{
 			if (strcmp(quantityUnit, "") == 0)
