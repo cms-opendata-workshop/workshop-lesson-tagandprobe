@@ -9,7 +9,7 @@ objectives:
 - "Get efficiency by sideband subtraction real and simulated data."
 keypoints:
 - "There is a file in **main/config/settings.cpp** where you can add some options."
-- "You can edit the binnig in **main/classes/PtEtaPhi.h** file."
+- "You can edit the binnig in **main/classes/PassingFailing.h** file."
 ---
 
 ## Preparing files
@@ -140,6 +140,172 @@ e `bool isMC` and `const char* resonance`, but at this time it is done already a
 >
 > Also this code was made for Upsilon and J/psi only. We pretend to work on for Z Boson in future.
 {: .callout}
+
+## Changing binning
+
+To change binnig, find **PassingFailing.h**
+
+~~~
+cd ../classes
+ls
+~~~
+{: .language-bash}
+
+~~~
+FitFunctions.h   MassValues.h      PtEtaPhi.h             TagProbe.h
+InvariantMass.h  PassingFailing.h  SidebandSubtraction.h  Type.h
+~~~
+{: .output}
+
+Open **PassingFailing.h**
+
+~~~
+gedit PassingFailing.h
+~~~
+{: .language-bash}
+
+Search for `createEfficiencyPlot(...)` function. You will find something like this:
+
+~~~
+void createHistogram(TH1D* &histo, const char* histoName)
+{...}
+~~~
+{: .language-cpp}
+
+For each quantity (pT, eta, phi) is there different bins. A way to change them is look inside `createEfficiencyPlot(...)` function. In a simplifyied version, you are going to see a structure like this:
+
+~~~
+//Variable bin for pT
+if (strcmp(quantityName, "Pt") == 0)
+{
+	//Here creates histogram for pT
+}
+
+//Variable bin for eta
+else if (strcmp(quantityName, "Eta") == 0)
+{
+	//Here creates histogram for eta
+}
+
+//Bins for phi
+else
+{
+	//Here creates histogram for phi
+}
+~~~
+{: .language-cpp}
+
+> ## See whole scructure
+> 
+> Do not be scred! Codes do not bite.
+>
+> ~~~
+> //Variable bin for pT
+> if (strcmp(quantityName, "Pt") == 0)
+> {
+> 	double xbins[10000];
+> 	xbins[0] = .0;
+> 	int nbins = 0;
+> 	double binWidth = 1.;
+> 	for (int i = 1; xbins[i-1] < xMax+binWidth; i++)
+> 	{
+> 		xbins[i] = xbins[i-1] < 1. ? 1. : xbins[i-1] *(1+binWidth);
+> 		nbins++;
+> 	}
+> 
+> 	histo = new TH1D(hName.data(), hTitle.data(), nbins, xbins);
+> }
+> 
+> //Variable bin for eta
+> else if (strcmp(quantityName, "Eta") == 0)
+> {
+> 	double xbins[10000];
+> 	xbins[0] = .5;
+> 	int nbins = 0;
+> 	double binWidth = 0.2;
+> 
+> 	//For positive
+> 	for (int i = 1; xbins[i-1] < xMax+binWidth; i++)
+> 	{
+> 		xbins[i] = xbins[i-1] < 1. ? 1. : xbins[i-1] *(1+binWidth);
+> 		nbins++;
+> 	}
+> 
+> 	//Duplicate array and create another
+> 	double rxbins[nbins*2+1];
+> 	int entry = 0;
+> 	for (int i = nbins; i >= 0; i--)
+> 	{
+> 		rxbins[entry] = -xbins[i];
+> 		entry++;
+> 	}
+> 	rxbins[entry] = 0.;
+> 	entry++;
+> 	for (int i = 0; i <= nbins; i++)
+> 	{
+> 		rxbins[entry] = xbins[i];
+> 		entry++;
+> 	}
+> 	
+> 	histo = new TH1D(hName.data(), hTitle.data(), entry-1, rxbins);
+> }
+> 
+> //Bins for phi 
+> else
+> {
+> 	if (strcmp(quantityUnit, "") == 0)
+> 	{
+> 		yAxisTitleForm += " / (%1." + to_string(decimals) + "f)";
+> 	}
+> 	else
+> 	{
+> 		yAxisTitleForm += " / (%1." + to_string(decimals) + "f " + string(quantityUnit) + ")";
+> 	}
+> 
+>  histo = new TH1D(hName.data(), hTitle.data(), nBins, xMin, xMax);
+> } 
+> ~~~
+> {: .language-cpp}
+{: .solution}
+
+In those commented lines inside conditionals there are codes to create histograms bins. You can edit them to create histogram bins however you want. But, instead of doing create a code to create bins for us, we can write by hand a array of bins for histogram creation.
+
+As we are going to compare with fitting method, we should use the same bins. Change your the code to this:
+
+~~~
+//Variable bin for pT
+if (strcmp(quantityName, "Pt") == 0)
+{
+	double xbins[] = {2, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.2, 6.4, 6.6, 6.8, 7.3, 7.6, 8.0, 8.5, 9.0, 10.0, 11.0, 13.0, 17.0, 50.0};
+	int nbins = 43;
+
+	histo = new TH1D(hName.data(), hTitle.data(), nbins, xbins);
+}
+
+//Variable bin for eta
+else if (strcmp(quantityName, "Eta") == 0)
+{
+	double xbins[] = {-2.0, -1.9, -1.8, -1.7, -1.6, -1.5, -1.4, -1.2, -1.0, -0.8, -0.6, -0.4, 0, 0.2, 0.4, 0.6, 0.7, 0.95, 1.2, 1.4, 1.5, 1.6, 2.0};
+	int nbins = 22;
+
+	histo = new TH1D(hName.data(), hTitle.data(), nbins, xbins);
+}
+
+//Bins for phi
+else
+{
+	double xbins[] =  {-3, -2.8, -2.6, -2.4, -2.2, -2.0, -1.8, -1.6, -1.4, -1.2, -1.0, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.5, 0.6, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0};
+	int nbins = 30;
+
+	histo = new TH1D(hName.data(), hTitle.data(), nbins, xbins);
+}
+~~~
+{: .language-cpp}
+
+Now we have a different bins creation.
+
+
+
 
 ## Running the code
 

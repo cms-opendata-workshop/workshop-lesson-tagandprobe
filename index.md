@@ -7,7 +7,7 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 > ## What is this lesson about?
 >
 > Welcome.  In this lesson you will:
-> - Learn whatTag & Probe method is.
+> - Learn what Tag & Probe method is.
 > - A simple way to measure efficiency.
 > - Learn two method of signal extraction from a dataset.
 > - Learn how to use efficiency measurement tools.
@@ -18,14 +18,5 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 > - [ROOT CERN](https://root.cern/install/) 6.22 or later installed.
 > - A basic understanding of terminal commands.
 {: .prereq}
-
-> ## Challenge
->
-> Welcome.  In this lesson you will:
-> - Learn whatTag & Probe method is.
-> - A simple way to measure efficiency.
-> - Learn two method of signal extraction from a dataset.
-> - Learn how to use efficiency measurement tools.
-{: .challenge}
 
 {% include links.md %}
