@@ -82,6 +82,10 @@ main  README.md  Run2011A_MuOnia_Upsilon.root  Upsilon1SToMuMu_MC_full.root
 ~~~
 {: .output}
 
+Now your `efficiency_tagandprobe` folder will have these files:
+
+![Files in efficiency_tagandprobe folder](../fig/files_sideband.png)
+
 ## Preparing code for Run 2011
 
 > It will teach you localize files by terminal, but you can use some file explorer program.
