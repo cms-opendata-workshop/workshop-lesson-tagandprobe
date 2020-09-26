@@ -33,4 +33,3 @@ The simple efficiency definition worked so on in this code is:
 
 
 {% include links.md %}
-

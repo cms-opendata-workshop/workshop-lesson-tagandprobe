@@ -1,7 +1,7 @@
 ---
 title: "Sideband subtraction method"
 teaching: 4
-exercises: 20
+exercises: 25
 questions:
 - "What is sideband subtraction?"
 - "How implement sideband subtraction?"
@@ -9,7 +9,7 @@ objectives:
 - "Learn how to set bins in a sideband subtraction tool."
 - "Get efficiency by sideband subtraction real and simulated data."
 keypoints:
-- "There is a file in **main/config/settings.cpp** where you can add some options."
+- "There is a file in **main/config/settings.cpp** where you can edit some options."
 - "You can edit the binnig in **main/classes/PassingFailing.h** file."
 - "The main code is located in **main/macro.cpp**"
 ---
@@ -143,7 +143,7 @@ bool doGlobal     = false;
 
 Also we are looking for getting efficiency of specifics file we downloaded. They name are `Run2011A_MuOnia_Upsilon.root` and `Upsilon1SToMuMu_MC_full.root`. They are listed in `const char *files[]`. While **settings.cpp** is open, try to use the variable `int useFile` to run `Run2011A_MuOnia_Upsilon.root`.
 
-> ## How to do this?
+> ## How to do this
 >
 > Make sure `useFile` is correct:
 >
@@ -400,6 +400,23 @@ Done. All result files can be found at "../results/Upsilon Run 2011/"
 root[1]
 ~~~
 {: .output}
+
+> ## Common errors
+>
+> If you run the code and your terminal printed some erros like:
+>
+> ~~~
+> Error in <ROOT::Math::Cephes::incbi>: Wrong domain for parameter b (must be > 0)
+> ~~~
+> {: .error}
+>
+> It occours when a bin of pass histogram is greater than total histogram. With sideband subtraction, depending on bins you choose, this can happen.
+> As we are looking for compare efficiencies between sideband subtraction and fitting method, it is good to use same bins.
+> This is also the reason for some enormous error bars.
+>
+> Just ignore it.
+> 
+{: .callout}
 
 Now you can type the code below to **quit root** and close all created windows:
 
