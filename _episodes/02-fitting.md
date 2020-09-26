@@ -21,7 +21,7 @@ To prepare for this tutorial, clone the respective github repository
 ~~~
 git clone https://github.com/AthomsG/CMS-tutorial
 ~~~
-{: .terminal}
+{: .language-bash}
 
 ## Structure
 
@@ -37,7 +37,7 @@ Let's start exploring our dataset. From the
 ~~~
 root T\&P_UPSILON_DATA.root
 ~~~
-{: .terminal}
+{: .language-bash}
 
 If everything's right, you should get the following output:
 ~~~
@@ -51,7 +51,7 @@ Now, before we start fitting the invariant mass it's important to look at it's s
 ~~~
 UPSILON_DATA->Draw("InvariantMass")
 ~~~
-{: .terminal}
+{: .language-bash}
 
 If you got the following result, we're ready to go
 
@@ -76,7 +76,7 @@ It is useful to have an idea of the distribution of the quantity we want to stud
 root T\&P_UPSILON_DATA.root
 UPSILON_DATA->Draw("ProbeMuon_Pt")
 ~~~
-{: .terminal}
+{: .language-bash}
 
 Hmm.. seems like our domain is larger than we need it to be. To fix this, we can apply a contraint to our plot. Try:
 
@@ -84,6 +84,7 @@ Hmm.. seems like our domain is larger than we need it to be. To fix this, we can
 root T\&P_UPSILON_DATA.root
 UPSILON_DATA->Draw("ProbeMuon_Pt", "ProbeMuon_Pt < 20")
 ~~~
+{: language-bash}
 
 Now that we have a clear view of the transverse momentum, we can now choose the appropriate bins for our fit. Remember that we need a fair amount of data in order to have a good fit, so be careful not to include too few events on a given bin. I've left a suggestion for an appropriate bin setup on `Bin_Suggestion.txt`
 
