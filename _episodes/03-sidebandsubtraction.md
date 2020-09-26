@@ -44,6 +44,12 @@ Applying those equations we get histograms like this:
 
 You will see this histogram on this exercise.
 
+> ## About this code
+>
+> More info about this code can be [found here](http://tagandprobe-documentation.web.cern.ch/tagandprobe-documentation/).
+> 
+{: .callout}
+
 ## Preparing files
 
 Firstly, we need to get the code. Type on your terminal;
