@@ -1,16 +1,48 @@
 ---
 title: "Sideband subtraction method"
-teaching: 5
-exercises: 40
+teaching: 4
+exercises: 20
 questions:
 - "What is sideband subtraction?"
+- "How implement sideband subtraction?"
 objectives:
-- "Learn how to set bins in this tool."
+- "Learn how to set bins in a sideband subtraction tool."
 - "Get efficiency by sideband subtraction real and simulated data."
 keypoints:
 - "There is a file in **main/config/settings.cpp** where you can add some options."
 - "You can edit the binnig in **main/classes/PassingFailing.h** file."
+- "The main code is located in **main/macro.cpp**"
 ---
+
+### Signal extraction: sideband subtraction method
+
+The efficiency is calculated using **only signal muons**. So it needs a way to extract signal from the dataset. Another method to do this is usng the sideband subtraction method.
+
+This method consists in choosing sideband and signal regions in invariant mass histogram. The sideband regions is supposed to have only background particles and the signal region have background and signal particle.
+
+![Invariant Mass histogram](../fig/InvariantMass_Tracker_region.png)
+
+With this in mind, we plot a quantity histogram for signal region and sideband region. Then the signal histogram is subtracted usign this formula:
+
+<img width="440px" src="../fig/subtraction.svg" alt="Sideband Subtraction equation">
+
+Where:
+
+<img width="450px" src="../fig/alpha.svg" alt="Alpha factor equation">
+
+And for uncertain:
+
+<img width="380px" src="../fig/subtraction_error.svg" alt="Sideband Subtraction errors equation">
+
+Applying those equations we get histograms like this:
+
+![Invariant Mass histogram](../fig/Tracker_Probe_Pt_Passing.png)
+
+* Solid blue line (Total) = particles in signal region;
+* Dashed blue line (Background) = particles in sideband regions;
+* Solid magenta line (signal) = signal histogram subtracted.
+
+You will see this histogram on this exercise.
 
 ## Preparing files
 
@@ -54,7 +86,7 @@ main  README.md  Run2011A_MuOnia_Upsilon.root  Upsilon1SToMuMu_MC_full.root
 
 > It will teach you localize files by terminal, but you can use some file explorer program.
 
-Now we need to edit some settings. Go localize `settings.cpp`:
+Now we need to edit some settings. Go localize **settings.cpp**:
 
 ~~~
 cd main/config
@@ -83,7 +115,7 @@ nano settings.cpp
 
 We are looking for calculating **efficiencies of tracker muons**, so do not need to measure standalone and global.
 
-With **setting.cpp** file opened, make sure let variables like this:
+With **settings.cpp** file opened, make sure let variables like this:
 
 ~~~
 //Canvas drawing
@@ -141,7 +173,7 @@ e `bool isMC` and `const char* resonance`, but at this time it is done already a
 > Also this code was made for Upsilon and J/psi only. We pretend to work on for Z Boson in future.
 {: .callout}
 
-## Changing binning
+## Editting bins
 
 To change binnig, find **PassingFailing.h**
 
@@ -354,6 +386,8 @@ In this process, more informations will be printed in terminal while plots will 
 
 ~~~
 Done. All result files can be found at "../results/Upsilon Run 2011/"
+
+root[1]
 ~~~
 {: .output}
 
@@ -364,6 +398,16 @@ Now you can type the code below to **quit root** and close all created windows:
 ~~~
 {: .language-bash}
 
+## Probe Efficiency results for Run 2011
+
+If you did everything right, your results are going to be like these:
+
+![Invariant Mass histogram](../fig/Run_Efficiency_Tracker_Probe_Pt.png)
+
+![Invariant Mass histogram](../fig/Run_Efficiency_Tracker_Probe_Eta.png)
+
+![Invariant Mass histogram](../fig/Run_Efficiency_Tracker_Probe_Phi.png)
+
 ## Preparing and running the code for simulated data
 
 > ## Challenge
@@ -372,7 +416,13 @@ Now you can type the code below to **quit root** and close all created windows:
 >
 > > ## Tip
 > > 
-> > You will need the redo the steps above, but setting `int useFile = 3;`.
+> > You will need the redo the steps above, but setting:
+> > ~~~
+> > int useFile = 3;
+> > ~~~
+> > {: .language-cpp}
+> >
+> > in `main/config/settings.cpp` file.
 > >
 > {: .solution}
 >
