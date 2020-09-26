@@ -9,14 +9,14 @@ objectives:
 - "Know what is tag and probe method."
 - "Know what kind of efficiency we are looking for."
 keypoints:
-- "Tag and probe are labels for each muon of a dimuon ressonance."
+- "Tag and probe are labels for each muon of dimuon resonance."
 - "Tag is a biased particle while probe are unbiased."
 - "The efficiency we are looking in this exercise is for tracker muons."
 ---
 
 ## What is tag and probe method?
 
-The tag and probe method consists calculating the efficiency of a dataset without depending on simulations. As it does not need simulations, there are necessary use known resonances as J/psi, Upsilon and Boson Z. This code is prepared to work with J/psi and Upsilon (1S) resonances.
+The tag and probe method consists calculating the efficiency of a dataset without depending on simulations. As it does not need simulations, there are necessary use known resonances as J/psi, Upsilon and Z Boson. This code is prepared to work with J/psi and Upsilon (1S) resonances.
 
 ## What is "tag" and "probe"?
 

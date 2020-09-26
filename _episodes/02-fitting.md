@@ -84,7 +84,7 @@ Hmm.. seems like our domain is larger than we need it to be. To fix this, we can
 root T\&P_UPSILON_DATA.root
 UPSILON_DATA->Draw("ProbeMuon_Pt", "ProbeMuon_Pt < 20")
 ~~~
-{: language-bash}
+{: .language-bash}
 
 Now that we have a clear view of the transverse momentum, we can now choose the appropriate bins for our fit. Remember that we need a fair amount of data in order to have a good fit, so be careful not to include too few events on a given bin. I've left a suggestion for an appropriate bin setup on `Bin_Suggestion.txt`
 

@@ -11,8 +11,8 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 > Welcome.  In this lesson you will:
 > - Learn what Tag & Probe method is.
 > - Plot efficiencies histograms for Upsilon resonance.
-> - Learn two method of signal extraction from a dataset.
-> - Learn how to use efficiency measurement tools.
+> - Learn two methods for signal extraction from a dataset.
+> - Learn how to use two efficiency measurement tools.
 {: .objectives}
 
 > ## Prerequisites

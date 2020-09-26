@@ -169,7 +169,7 @@ Also we are looking for getting efficiency of specifics file we downloaded. They
 > ~~~
 > {: .language-cpp}
 >
-> It will tell wich configuration will use. So, the macro will run with the Ntupple in `files[useFile]` and results will be stored in `directoriesToSave[useFile]`.
+> It will tell which configuration will use. So, the macro will run with the Ntupple in `files[useFile]` and results will be stored in `directoriesToSave[useFile]`.
 >
 > Three firsts files are not used in this execise.
 {: .solution}
@@ -418,7 +418,7 @@ root[1]
 > 
 {: .callout}
 
-Now you can type the code below to **quit root** and close all created windows:
+Now you can type the command below to **quit root** and close all created windows:
 
 ~~~
 .q
@@ -430,9 +430,7 @@ Now you can type the code below to **quit root** and close all created windows:
 If you did everything right, your results are going to be like these:
 
 ![Invariant Mass histogram](../fig/Run_Efficiency_Tracker_Probe_Pt.png)
-
 ![Invariant Mass histogram](../fig/Run_Efficiency_Tracker_Probe_Eta.png)
-
 ![Invariant Mass histogram](../fig/Run_Efficiency_Tracker_Probe_Phi.png)
 
 ## Preparing and running the code for simulated data
