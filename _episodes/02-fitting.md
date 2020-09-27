@@ -5,7 +5,6 @@ exercises: 40
 questions:
 - "What is this fitting method?"
 - "how do we use it to calculate the efficiency?"
-- "Why is it better than sideband subtraction?"
 objectives:
 - "Understand the fitting method, it's advantages and disadvantages"
 - "Learn how to implement this method using ROOT library for c++"
