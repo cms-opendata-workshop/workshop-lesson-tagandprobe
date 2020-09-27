@@ -18,11 +18,11 @@ keypoints:
 
 The efficiency is calculated using **only signal muons**. So it needs a way to extract signal from the dataset. Another method to do this is usng the sideband subtraction method.
 
-This method consists in choosing sideband and signal regions in invariant mass histogram. The sideband regions is supposed to have only background particles and the signal region have background and signal particle.
+This method consists in choosing sideband and signal regions in invariant mass distribution.. The sideband regions is supposed to have only background particles and the signal region have background and signal particle.
 
 ![Invariant Mass histogram](../fig/InvariantMass_Tracker_region.png)
 
-> Note: we choosed only the Upsilon (1S) signal as signal region because the simulations dataset does only have Upsilon (1S) signal.
+> Note: we choosed only the ϒ (1S) signal as signal region because the simulations dataset does only have ϒ (1S) signal.
 
 With this in mind, we plot a quantity histogram for signal region and sideband region. Then the signal histogram is subtracted usign this formula:
 
@@ -62,7 +62,7 @@ cd efficiency_tagandprobe
 ~~~
 {: .language-bash}
 
-Now we want to copy Upsilon dataset (from run 2011) file to machine running this command (It is about 441 MB):
+Now we want to copy ϒ dataset (from run 2011) file to machine running this command (It is about 441 MB):
 
 ~~~
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1Fj-rrKts8jSSMdwvOnvux68ydZcKB521' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1Fj-rrKts8jSSMdwvOnvux68ydZcKB521" -O Run2011A_MuOnia_Upsilon.root && rm -rf /tmp/cookies.txt
@@ -71,7 +71,7 @@ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download
 
 This code seems to be large, but it is required to copy large files from google drive.
 
-Run this code to download the simulated data ntupple for Upsilon (It is about 66 MB):
+Run this code to download the simulated data ntupple for ϒ (It is about 66 MB):
 
 ~~~
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1ZzAOOLCKmCz0Q6pVi3AAiYFGKEpP2efM' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1ZzAOOLCKmCz0Q6pVi3AAiYFGKEpP2efM" -O Upsilon1SToMuMu_MC_full.root && rm -rf /tmp/cookies.txt
@@ -182,7 +182,7 @@ Also we are looking for getting efficiency of specifics file we downloaded. They
 > Normally we need to set variabl
 e `bool isMC` and `const char* resonance`, but at this time it is done already and set automatically for these ntupples names.
 >
-> Also this code was made for Upsilon and J/psi only. We pretend to work on for Z Boson in future.
+> Also this code was made for ϒ and J/ψ only. We pretend to work on for Z Boson in future.
 {: .callout}
 
 ## Editting bins
@@ -366,7 +366,7 @@ classes  compare_efficiency.cpp  config  macro.cpp
 ~~~
 {: .output}
 
-Initialize root:
+Initialize ROOT:
 
 ~~~
 root -l
@@ -431,9 +431,9 @@ Now you can type the command below to **quit root** and close all created window
 
 If you did everything right, your results are going to be like these:
 
-![Invariant Mass histogram](../fig/Run_Efficiency_Tracker_Probe_Pt.png)
-![Invariant Mass histogram](../fig/Run_Efficiency_Tracker_Probe_Eta.png)
-![Invariant Mass histogram](../fig/Run_Efficiency_Tracker_Probe_Phi.png)
+![Efficiency plot](../fig/sideband_run2011/Efficiency_Tracker_Probe_Pt.png)
+![Efficiency plot](../fig/sideband_run2011/Efficiency_Tracker_Probe_Eta.png)
+![Efficiency plot](../fig/sideband_run2011/Efficiency_Tracker_Probe_Phi.png)
 
 ## Preparing and running the code for simulated data
 
@@ -465,16 +465,16 @@ If you did everything right, your results are going to be like these:
 
 > ## Extra challenge
 >
-> If you are looking for a extra exercise, you can try to apply the same you did, changing some variables you saw and try to get results from a J/psi nutpple.
+> If you are looking for a extra exercise, you can try to apply the same you did, changing some variables you saw and try to get results from a J/ψ nutpple.
 > 
-> To download J/psi real data ntupple (about 3.3 GB):
+> To download J/ψ real data ntupple (about 3.3 GB):
 >
 > ~~~
 > wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=16OqVrHIB4wn_5X8GEZ3NxnAycZ2ItemZ' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=16OqVrHIB4wn_5X8GEZ3NxnAycZ2ItemZ" -O Run2011AMuOnia_mergeNtuple.root && rm -rf /tmp/cookies.txt
 > ~~~
 > {: .language-bash}
 >
-> To download J/psi simulated data ntupple (about 515 MB):
+> To download J/ψ simulated data ntupple (about 515 MB):
 >
 > ~~~
 > wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1dKLJ5RIGrBp5aIJrvOQw5lWLQSHUgEnf' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1dKLJ5RIGrBp5aIJrvOQw5lWLQSHUgEnf" -O JPsiToMuMu_mergeMCNtuple.root && rm -rf /tmp/cookies.txt

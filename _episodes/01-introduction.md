@@ -4,7 +4,7 @@ teaching: 5
 exercises: 0
 questions:
 - "What is tag and probe method?"
-- "Which efficiency?"
+- "How to get efficiency?"
 objectives:
 - "Know what is tag and probe method."
 - "Know what kind of efficiency we are looking for."
@@ -16,7 +16,7 @@ keypoints:
 
 ## What is tag and probe method?
 
-The tag and probe method consists calculating the efficiency of a dataset without depending on simulations. As it does not need simulations, there are necessary use known resonances as J/psi, Upsilon and Z Boson. This code is prepared to work with J/psi and Upsilon (1S) resonances.
+The tag and probe method consists calculating the efficiency of a dataset without depending on simulations. As it does not need simulations, there are necessary use known resonances as J/ψ, ϒ and Z Boson. This code is prepared to work with J/ψ and Upsilon (1S) resonances.
 
 ## What is "tag" and "probe"?
 
@@ -31,12 +31,20 @@ The simple efficiency definition worked so on in this code is:
 
 <img width="300px" src="../fig/efficiency.svg" alt="Efficiency equation">
 
-Passes particle in this workshop we will analyse is **Tracker muons** and this equation returns resonance reconstruction efficiency.
+In this workshop, the passing particles that we are evaluating efficiency are **Tracker muons** and the equation above returns the resonance reconstruction efficiency. In the section below, we are making a short description of the Muon Identification and Reconstruction definition used by CMS experiment.
 
 ## CMS Muon identification reconstruction
 
-Tracker muons are muons that are detected in cms inner trackers, but not necessarily only in this detector.
-
 ![CMS muon id](../fig/tracker_muon.png)
+
+In the standard CMS reconstruction for proton-proton collisions, tracks are first reconstructed independently in the inner tracker and in the muon system. Based on these objects, two reconstruction approaches are used:
+
+* Tracker Muon reconstruction (red line): In this approach, all tracker tracks with pT > 0.5 GeV/c and total momentum p > 2.5 GeV/c are considered as possible muon candidates and are extrapolated to the muon system taking into account the magnetic field;
+
+* Standalone Muon reconstruction (green line): they are all tracks of the segments reconstructed in the muon chambers (performed using segments and hits from Drift Tubes - DTs in the barrel region, Cathode strip chambers - CSCs in the endcaps and Resistive Plates Chambers - RPCs for all muon system) are used to generate "seeds" consisting of position and direction vectors and an estimate of the muon transverse momentum;
+
+* Global Muon reconstruction (blue line): For each standalone-muon track, a matching tracker track is found by comparing parameters of the two tracks propagated onto a common surface.
+
+You can find more details concerning CMS Muon Identification and reconstruction in this paper [JINST 7 (2012) P10002].
 
 {% include links.md %}

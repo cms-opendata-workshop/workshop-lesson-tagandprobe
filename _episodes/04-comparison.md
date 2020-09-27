@@ -460,9 +460,21 @@ You get this reults:
 
 > ## Extra challenge - recreate Ntupples
 >
-> If you are looking go far than this workshop, you can try to recreate those ntupples we used here. The code used to create them can be [found here](https://github.com/sandrofonseca/TagAndProbe).
+> If you are looking for an extra exercise, you can try to apply the same you did, changing some variables you saw and try to get results from a J/ψ decaying in dimuons ntuple @ 7 TeV.
 > 
-> It is a working progress and a adaptation from CMS official code to create ntupples.
+> Concerning the datasets used to produce these extra exercises, you can find in these links below:
+>
+> * [Real data (2011 legacy)](http://opendata.cern.ch/record/27)
+> * [ϒ Monte Carlo simulations](http://opendata.cern.ch/record/1522)
+> * [J/ψ Monte Carlo simulations](http://opendata.cern.ch/record/1335)
+>
+> Concerning about triggers:
+>
+> * **HLT Triggers Path (J/ψ - Data/MC)**: HLT_Dimuon10_Jpsi_Barrel_v*
+> * **HLT Triggers Path (ϒ - Data)**: HLT_Dimuon0_Barrel_Upsilon 
+> * **HLT Triggers Path (ϒ - MC)**: HLT_Dimuon0_Upsilon 
+> 
+> It is a work in progress adapted from CMS official code to create cms Open Data Tag and Probe ntuples.
 >
 {: .challenge}
 
