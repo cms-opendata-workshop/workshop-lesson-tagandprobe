@@ -127,7 +127,7 @@ string* conditions = get_conditions(bin_n, bins);
 
 The fits in this tutorial will be calculated using the `/src/DoFit.cpp` function based on the [RooFit](https://root.cern.ch/doc/master/group__Roofit.html) library.
 
-Brief explanation of the gist of it.
+You can find a very good tutorial on how to use **RooFit** on [this link](https://indico.scc.kit.edu/event/31/contributions/1864/attachments/1105/1550/lukas_hehn_kseta-workshop_introduction-to-RooFit.pdf).
 
 > ## Open `DoFit.cpp`
 >
@@ -303,6 +303,8 @@ Brief explanation of the gist of it.
 > 
 {: .solution}
 
+the `DoFit.cpp` function executes a simultaneous fit, leaving only as a variable between all the probes and the passing probes, the yield of the signal and the yield of the background. 
+
 After understanding the basics of how fitting with *RooFit* works, fill in the `init_conditions` with initial approximations that you find reasonable for each parameter.
 I recommend plotting the invariant mass of our dataset again and choosing the values as close as possible to the 'real' ones.
 Now we only need to create a loop to fit each bin and save the yields and associated errors in order to get the efficiency. This is achieved by:
@@ -321,7 +323,10 @@ for (int i = 0; i < bin_n; i++)
 To get the efficiency plot, we'll use the [TEfficiency](https://root.cern.ch/doc/master/classTEfficiency.html)  class.
 You'll see that in order to create a ``TEfficiency`` object, on of the [constructors requires](https://root.cern.ch/doc/master/classTEfficiency.html#aa0e99b4161745fd3bee0ae5c0f58880e) requires two ``TH1``objects. One with All the probes and one with the passing probes.
 
-NOTA A DIZER QUE OS TH1F TEM DE CONTER OS ERROS!!
+> ## Important note
+>You musn't forget to add the fitting errors to the yield histograms. Using ``/src/make_hist.cpp``  will guarantee that the errors are included.
+> 
+{: .callout}
 
 The creation of these ``TH1`` objects is taken care of by the ``/src/make_hist.cpp`` function.
 
