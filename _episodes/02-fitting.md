@@ -22,7 +22,7 @@ git clone https://github.com/AthomsG/CMS-tutorial
 ~~~
 {: .language-bash}
 
-## Structure
+## The Fitting Method
 
 First, a brief explanaiton of the method we'll be studying.
 The fitting method consists in dividing the quantity we want to use to calculate the efficiency into a certain amout of bins and then fitting the invariant mass of the muons (All and Passing) on the specified region. The fit allows us to divide between signal and background.
@@ -77,7 +77,7 @@ It is useful to have an idea of the distribution of the quantity we want to stud
 
 ~~~
 root T\&P_UPSILON_DATA.root
-UPSILON_DATA->Draw("ProbeMuon_Pt")
+[0]UPSILON_DATA->Draw("ProbeMuon_Pt")
 ~~~
 {: .language-bash}
 
@@ -86,8 +86,7 @@ UPSILON_DATA->Draw("ProbeMuon_Pt")
 Hmm.. seems like our domain is larger than we need it to be. To fix this, we can apply a contraint to our plot. Try:
 
 ~~~
-root T\&P_UPSILON_DATA.root
-UPSILON_DATA->Draw("ProbeMuon_Pt", "ProbeMuon_Pt < 20")
+[1]UPSILON_DATA->Draw("ProbeMuon_Pt", "ProbeMuon_Pt < 20")
 ~~~
 {: language-bash}
 
@@ -101,8 +100,8 @@ Now that we have a clear view of the transverse momentum, we can now choose the 
 >
 > ~~~
 > // TRACKER MUON BINS -------------------------------------------------------------------
->//double bins[] = {2, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.2, 6.4, 6.6, 6.8, 7.3, 7.6, 8.0, 8.5, 9.0, 10.0, 11.0, 13.0, 17.0, 50.0};
->//int bin_n = 43;       //-- BINS USED TO CALCULATE PT
+>//double bins[] = {2, 3.4, 4, 4.2, 4.4, 4.7, 5.0, 5.1, 5.2, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.2, 6.4, 6.6, 6.8, 7.3, 9.5, 13.0, 17.0, 40};
+>//int bin_n = 23;       //-- BINS USED TO CALCULATE PT
 >
 >//double bins[] = {-3, -2.8, -2.6, -2.4, -2.2, -2.0, -1.8, -1.6, -1.4, -1.2, -1.0, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.5, 0.6, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0};
 >//int bin_n = 30;       //-- BINS USED TO CALCULATE PHI
@@ -306,6 +305,19 @@ the `DoFit.cpp` function executes a simultaneous fit, leaving only as a variable
 
 After understanding the basics of how fitting with *RooFit* works, fill in the `init_conditions` with initial approximations that you find reasonable for each parameter.
 I recommend plotting the invariant mass of our dataset again and choosing the values as close as possible to the 'real' ones.
+
+> ## Suggestion for Initial Values
+>Try the following initial values:
+> 
+><ul>
+><li>init_conditions[0] = 9.46030;</li>
+><li>init_conditions[1] = 10.02326;</li>
+><li>init_conditions[2] = 10.3552;</li>
+><li>init_conditions[3] = 0.08;</li>
+></ul>
+>
+> 
+{: .solution}
 Now we only need to create a loop to fit each bin and save the yields and associated errors in order to get the efficiency. This is achieved by:
 
 ~~~
@@ -396,5 +408,46 @@ To plot the efficiency we'll the use the ``/src/get_efficiency.cpp`` function.
 >
 > 
 {: .solution}
+
+to run your code, type:
+~~~
+root Efficiency.C
+~~~
+{: .language-bash}
+
+when the macro stops doing it's thing, you should have 2 new files on your working directory:  ``Efficiency_Run2011.root`` and ``Histograms.root``.
+The first contains the efficiency we calculated! the second file is used to redo any unusable fits.
+To open ``Efficiency_Run2011.root``, on your working directory type:
+
+~~~
+root
+[0] new TBrowser
+~~~
+{: .language-bash}
+
+<img width="500px" src="../fig/TBrowser_efficiency.png">
+
+A window like this should have popped up.
+If you click on ``Efficiency_Run2011.root``, a plot will show up with the efficiency value for each bin!
+
+Now we must re-run the code, but before that, change ``DataIsMc`` value to **TRUE**. This will generate an efficiency for the simulated data, so that we can compare it with the 2011 run.
+
+Check that you have both ```Efficiency_Run2011.root``` and ```Efficiency_MC.root``` files in each of these directories:
+
+<ul>
+<li>Efficiency Result/pT</li>
+<li>Efficiency Result/Eta</li>
+<li>Efficiency Result/Phi</li>
+</ul>
+
+If so, uncomment:
+
+~~~
+//compare_efficiency(quantity, "Efficiency\ Result/Pt/Efficiency_Run2011.root", "Efficiency\ Result/Pt/Efficiency_MC.root");
+~~~
+{: .language-bash}
+
+and run the macro
+
 
 {% include links.md %}
