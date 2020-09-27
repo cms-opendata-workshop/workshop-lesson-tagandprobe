@@ -22,9 +22,9 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 {: .prereq}
 
 > ## Helpline
-> Authors: Allan Jales (UERJ) and Thomas Gaehtgens (Instituto Superior Tecnico)
+> Authors: Allan Jales (Rio de Janeiro State University - UERJ/Brazil) and Thomas Gaehtgens (Instituto Superior Tecnico - IST/Lisbon)
 > 
-> Advisors: Eliza Melo, Nuno Leonardo and Sandro Fonseca
+> Advisors: Eliza Melo (UERJ/Brazil), Nuno Leonardo (LIP/Lisbon) and Sandro Fonseca (UERJ/Brazil)
 {: .callout}
 
 > ## Data used

@@ -31,5 +31,12 @@ The simple efficiency definition worked so on in this code is:
 
 <img width="300px" src="../fig/efficiency.svg" alt="Efficiency equation">
 
+Passes particle in this workshop we will analyse is **Tracker muons** and this equation returns resonance reconstruction efficiency.
+
+## What is tracker muons?
+
+Tracker muons are muons that are detected in cms inner trackers, but not necessarily only in this detector.
+
+![CMS muon id](../fig/tracker_muon.png)
 
 {% include links.md %}

@@ -22,6 +22,8 @@ This method consists in choosing sideband and signal regions in invariant mass h
 
 ![Invariant Mass histogram](../fig/InvariantMass_Tracker_region.png)
 
+> Note: we choosed only the Upsilon (1S) signal as signal region because the simulations dataset does only have Upsilon (1S) signal.
+
 With this in mind, we plot a quantity histogram for signal region and sideband region. Then the signal histogram is subtracted usign this formula:
 
 <img width="440px" src="../fig/subtraction.svg" alt="Sideband Subtraction equation">
