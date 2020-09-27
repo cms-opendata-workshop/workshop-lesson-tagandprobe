@@ -448,4 +448,23 @@ You get this reults:
 >
 {: .challenge}
 
+---
+
+> ## Extra challenge
+>
+> As you did last 2 extras challenges, now try to redo this exercise comparing results between challenges.
+>
+{: .challenge}
+
+---
+
+> ## Extra challenge - recreate Ntupples
+>
+> If you are looking go far than this workshop, you can try to recreate those ntupples we used here. The code used to create them can be [found here](https://github.com/sandrofonseca/TagAndProbe).
+> 
+> It is a working progress and a adaptation from CMS official code to create ntupples.
+>
+{: .challenge}
+
+
 {% include links.md %}

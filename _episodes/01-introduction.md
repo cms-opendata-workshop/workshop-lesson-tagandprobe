@@ -33,7 +33,7 @@ The simple efficiency definition worked so on in this code is:
 
 Passes particle in this workshop we will analyse is **Tracker muons** and this equation returns resonance reconstruction efficiency.
 
-## What is tracker muons?
+## CMS Muon identification reconstruction
 
 Tracker muons are muons that are detected in cms inner trackers, but not necessarily only in this detector.
 

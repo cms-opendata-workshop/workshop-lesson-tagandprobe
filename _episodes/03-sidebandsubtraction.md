@@ -455,5 +455,35 @@ If you did everything right, your results are going to be like these:
 >
 {: .challenge}
 
+> ## Comparison between real data and simulated data
+>
+> We will do it in the last episode of this exercise. So the challenge above is mandatory. 
+> 
+{: .callout}
+
+---
+
+> ## Extra challenge
+>
+> If you are looking for a extra exercise, you can try to apply the same you did, changing some variables you saw and try to get results from a J/psi nutpple.
+> 
+> To download J/psi real data ntupple (about 3.3 GB):
+>
+> ~~~
+> wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=16OqVrHIB4wn_5X8GEZ3NxnAycZ2ItemZ' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=16OqVrHIB4wn_5X8GEZ3NxnAycZ2ItemZ" -O Run2011AMuOnia_mergeNtuple.root && rm -rf /tmp/cookies.txt
+> ~~~
+> {: .language-bash}
+>
+> To download J/psi simulated data ntupple (about 515 MB):
+>
+> ~~~
+> wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1dKLJ5RIGrBp5aIJrvOQw5lWLQSHUgEnf' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1dKLJ5RIGrBp5aIJrvOQw5lWLQSHUgEnf" -O JPsiToMuMu_mergeMCNtuple.root && rm -rf /tmp/cookies.txt
+> ~~~
+> {: .language-bash}
+>
+> As it uses larger files, the code will run slowly. Just for real data at this time, code finish its run in about 25 min.
+>
+{: .challenge}
+
 
 {% include links.md %}
