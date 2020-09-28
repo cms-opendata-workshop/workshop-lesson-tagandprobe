@@ -447,7 +447,10 @@ If so, uncomment:
 ~~~
 {: .language-bash}
 
-and run the macro
+and run the macro again.
+You should get something like the following result. If so, repeat this process for the two quantites left to go, Eta and Phi!
+
+<img width="500px" src="../fig/Efficiency_thomas.png">
 
 
 {% include links.md %}
