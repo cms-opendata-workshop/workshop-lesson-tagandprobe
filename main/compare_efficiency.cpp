@@ -15,28 +15,28 @@ int useScheme = 0;
 
 //Root files and paths for Tefficiency objects inside these files
 const char* filePathsEff0[][2] = {
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Pt_Standalone_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Eta_Standalone_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Phi_Standalone_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Pt_Global_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Eta_Global_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Phi_Global_Probe_Efficiency"}
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Pt_Standalone_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Eta_Standalone_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Phi_Standalone_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Pt_Global_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Eta_Global_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Phi_Global_Probe_Efficiency"}
 };
 
 //Root files and paths for Tefficiency objects inside these files
 const char* filePathsEff1[][2] = {
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Pt_Standalone_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Eta_Standalone_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Phi_Standalone_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Pt_Global_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Eta_Global_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Phi_Global_Probe_Efficiency"}
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Pt_Standalone_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Eta_Standalone_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Phi_Standalone_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Pt_Global_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Eta_Global_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Phi_Global_Probe_Efficiency"}
 };
 
 //How comparisons will be saved
@@ -56,24 +56,31 @@ const char* resultNames[] = {
 const char* labelScheme[][2] = {
 	{"#Upsilon real data", "Simulated data"},
 	{"#Upsilon real data", "Simulated data"},
-	{"#Upsilon Sideband",  "#Upsilon Fitting"}
+	{"#Upsilon Sideband",  "#Upsilon Fitting"},
+	{"J/#psi real data",   "Simulated data"},
+	{"J/#psi real data",   "Simulated data"},
+	{"J/#psi Sideband",    "J/#psi Fitting"}
 };
 
 //Where to save each comparison
 const char* directoriesToSave[] = {
-	"../results/Comparison Upsilon Sideband Run vs MC/",
-	"../results/Comparison Upsilon Fitting Run vs MC/",
-	"../results/Comparison Upsilon Sideband vs Fitting/"
+	"../results/Comparison_Upsilon_Sideband_Run_vs_MC/",
+	"../results/Comparison_Upsilon_Fitting_Run_vs_MC/",
+	"../results/Comparison_Upsilon_Sideband_vs_Fitting/"
+	"../results/Comparison_Jpsi_Sideband_Run_vs_MC/",
+	"../results/Comparison_Jpsi_Fitting_Run_vs_MC/",
+	"../results/Comparison_Jpsi_Sideband_vs_Fitting/"
 };
 
 //Colors for each comparison
 int colorScheme[][2] = {
 	{kGreen - 2, kRed},
 	{kGreen - 2, kRed},
+	{kRed - 4,   kBlue + 1},
+	{kBlue,      kRed},
+	{kBlue,      kRed},
 	{kRed - 4,   kBlue + 1}
 };
-
-
 
 //Get TEfficiency from file_path
 TEfficiency* get_eff_plot(const char* file_path, const char* hist_path)
@@ -115,7 +122,7 @@ void compare_eff(TEfficiency* pEff0, TEfficiency* pEff1, string resultName, cons
 
 	pEff1->SetMarkerColor(colorScheme[useScheme][1]);
 	pEff1->SetLineColor(colorScheme[useScheme][1]);
-	pEff0->SetLineWidth(2);
+	pEff1->SetLineWidth(2);
 	pEff1->Draw("same");
 	
 	//Set range in y axis

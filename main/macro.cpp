@@ -55,7 +55,7 @@ void macro()
 
 
 
-	//Compatibility adjusts on file read (for data_histoall ntupples)
+	//Compatibility adjusts on file read (for data_histoall ntuples)
 	string folderName = "tagandprobe/";
 	if (needsRetroCompatibility)
 		folderName = "demo/";
