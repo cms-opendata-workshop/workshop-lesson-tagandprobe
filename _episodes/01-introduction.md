@@ -27,7 +27,7 @@ The resonance decays to a pair of particles: the tag and the probe.
 * Tag muon = well identified, triggered muon (tight selection criteria).
 * Probe muon = unbiased set of muon candidates (very loose selection criteria), either passing or failing the criteria for which the efficiency is to be measured.
 
-## How to get efficiency?
+## How to get an efficiency?
 
 The efficiency is given by the fraction of probe muons that pass the criteria:
 
@@ -35,7 +35,7 @@ The efficiency is given by the fraction of probe muons that pass the criteria:
 
 The denominator corresponds to the number of resonance candidates (tag+probe pairs) reconstructed in the dataset. The numerator corresponds to the subset for which the probe passes the criteria. 
 
-The tag+probe invariant mass distribution is used to select only signal, that is, only true Y(1S) candidates decaying to dimuons. This is achieved in this exercise with two methods: fitting and side-band-subtraction. 
+The tag+probe invariant mass distribution is used to select only signal, that is, only true Y(1S) candidates decaying to dimuons. This is achieved in this exercise with two methods: fitting and side-band-subtraction.
 
 ## CMS Muon identification reconstruction
 

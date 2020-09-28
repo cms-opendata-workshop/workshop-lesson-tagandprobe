@@ -10,8 +10,9 @@ objectives:
 - "Learn how to implement this method using ROOT library for c++"
 
 keypoints:
-- "Skrrt."
-- "There are essentially three important files in an EDAnalyzer package, the source code in c++, the python config file and a Buildfile for tracking dependencies."
+- "The dataset for this tutorial contemplates one Muon Id (Tracker Muon) with it's three quantities (pT, Eta, Phi)"
+- "You'll only need to change the ```/src/DoFit.cpp``` file if some of the fits aren't usable. Apart from that everything will be done on the ```Efficiency.C```"
+- "Documentation available [here](https://github.com/AthomsG/LIP_INTERNSHIP/blob/master/Documentation.md)"
 ---
 ## Prerequisite
 
@@ -25,10 +26,10 @@ git clone https://github.com/AthomsG/CMS-tutorial
 ## The Fitting Method
 
 First, a brief explanaiton of the method we'll be studying.
-The fitting method consists in dividing the quantity we want to use to calculate the efficiency into a certain amout of bins and then fitting the invariant mass of the muons (All and Passing) on the specified region. The fit allows us to divide between signal and background.
+The fitting method consists in dividing the quantity we want to use to calculate the efficiency into a certain amout of bins and then fitting the invariant mass of the muons (All and Passing) on each of the selected bins. The fit allows us to divide between signal and background.
 To compute the efficiency we simply divide the yield from the fit of the Passing muons by the yield of the fit of All the muons. The following image tries to illustrate this idea.
 
-<img width="500px" src="../fig/esquema.png">
+<img width="700px" src="../fig/esquema.png">
 
 > ## Important note
 >In this exercise, since the Monte Carlo data provided only has information about the first peak (1S) of the Upsilon resonance we will only consider the yield from the 1S on the data from the 2011 Run in order to compare the efficiency of both datasets.
@@ -48,6 +49,7 @@ Attaching file T&P_UPSILON_DATA.root as _file0...
 U(TFile *) 0x7fe2f34ca270
 ~~~
 {: .output}
+Remember that the units of the x axis are GeV/c.
 
 Now, before we start fitting the invariant mass it's important to look at it's shape first. To visualize our data's invariant mass, do:
 
@@ -77,7 +79,7 @@ It is useful to have an idea of the distribution of the quantity we want to stud
 
 ~~~
 root T\&P_UPSILON_DATA.root
-[0]UPSILON_DATA->Draw("ProbeMuon_Pt")
+UPSILON_DATA->Draw("ProbeMuon_Pt")
 ~~~
 {: .language-bash}
 
@@ -86,9 +88,9 @@ root T\&P_UPSILON_DATA.root
 Hmm.. seems like our domain is larger than we need it to be. To fix this, we can apply a contraint to our plot. Try:
 
 ~~~
-[1]UPSILON_DATA->Draw("ProbeMuon_Pt", "ProbeMuon_Pt < 20")
+UPSILON_DATA->Draw("ProbeMuon_Pt", "ProbeMuon_Pt < 20")
 ~~~
-{: language-bash}
+{: .language-bash}
 
 <img width="500px" src="../fig/zoom.png">
 
@@ -425,7 +427,7 @@ root
 ~~~
 {: .language-bash}
 
-<img width="500px" src="../fig/TBrowser_efficiency.png">
+<img width="700px" src="../fig/TBrowser_efficiency.png">
 
 A window like this should have popped up.
 If you click on ``Efficiency_Run2011.root``, a plot will show up with the efficiency value for each bin!
@@ -443,11 +445,20 @@ Check that you have both ```Efficiency_Run2011.root``` and ```Efficiency_MC.root
 If so, uncomment:
 
 ~~~
-//compare_efficiency(quantity, "Efficiency\ Result/Pt/Efficiency_Run2011.root", "Efficiency\ Result/Pt/Efficiency_MC.root");
+//compare_efficiency(quantity, "Efficiency_Result/Pt/Efficiency_Run2011.root", "Efficiency_Result/Pt/Efficiency_MC.root");
 ~~~
-{: .language-bash}
+{: .language-cpp}
 
-and run the macro
+and run the macro again.
+You should get something like the following result. If so, repeat this process for the two quantites left to go, Eta and Phi!
 
+<img width="500px" src="../fig/Efficiency_thomas.png">
+
+> ## Extra challenge
+>
+> Fancy some more work? download [this](https://drive.google.com/drive/folders/1YytJ7iTVYToUZemYIDLqr13wTjIYGERP?usp=sharing) J/ψ dataset and try out the new methods you just learned!
+>You'll have to change the DoFit.cpp function since J/ψ's only peak is made up of a crystall ball and a gaussian curve.
+>Good luck!
+{: .challenge}
 
 {% include links.md %}
