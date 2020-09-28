@@ -26,7 +26,7 @@ git clone https://github.com/AthomsG/CMS-tutorial
 ## The Fitting Method
 
 First, a brief explanaiton of the method we'll be studying.
-The fitting method consists in dividing the quantity we want to use to calculate the efficiency into a certain amout of bins and then fitting the invariant mass of the muons (All and Passing) on the specified region. The fit allows us to divide between signal and background.
+The fitting method consists in dividing the quantity we want to use to calculate the efficiency into a certain amout of bins and then fitting the invariant mass of the muons (All and Passing) on each of the selected bins. The fit allows us to divide between signal and background.
 To compute the efficiency we simply divide the yield from the fit of the Passing muons by the yield of the fit of All the muons. The following image tries to illustrate this idea.
 
 <img width="700px" src="../fig/esquema.png">
