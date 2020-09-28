@@ -3,11 +3,11 @@ title: "Sideband subtraction method"
 teaching: 4
 exercises: 25
 questions:
-- "What is the sideband subtraction methof?"
+- "What is the sideband subtraction method?"
 - "How to implement it?"
 objectives:
 - "Learn how to set bins in a sideband subtraction tool."
-- "Get efficiency by using the sideband subtraction on real and simulated data."
+- "Get efficiency by using the sideband subtraction on real data and simulation."
 keypoints:
 - "There is a file in **main/config/settings.cpp** where you can edit some options."
 - "You can edit the binnig in the **main/classes/PassingFailing.h** file."
@@ -18,17 +18,21 @@ keypoints:
 
 The efficiency is calculated using **only signal muons**. So we need a way to extract signal from the dataset. You've used the fitting method and now you'll meet the sideband subtraction method.
 
-This method consists in choosing sideband and signal regions in invariant mass distribution. The sideband regions have background particles and the signal region has background and signal particle.
+This method consists in choosing sideband and signal regions in invariant mass distribution. The sideband regions (shaded in red in the figure) have background particles and the signal region (shared in green in the figure) has background and signal particles.
 
 ![Invariant Mass histogram](../fig/InvariantMass_Tracker_region.png)
 
-> Note: we choose only the ϒ (1S) signal as signal region because the simulation dataset only has ϒ (1S) signal.
+> Note: The background corresponds to candidates that do not correspond to the decay of a genuine resonance; for example, the pair is formed by the tag muon associated to an uncorrelated track produced elsewhere in the collision; the corresponding invariant mass has thus a smooth continuous shape, that is extrapolated from the signal regions into the sideband region.
+
+> Note: we choose only the ϒ (1S) signal for selecting the signal region; simulation information is further available for this resonance, allowing in the end for a comparison of results, between data and simulation.
 
 With this in mind, we plot a quantity histogram for signal region and sideband region. Then the signal histogram is subtracted usign this formula:
 
+For each event category (i.e. Pass and All), and for a given variable of interest (e.g., the probe pT), two distributions are obtained, one for each region (Signal and Sideband). In order to obtain the variable distribution for the signal only, we proceed by subtracting the Background distribution (Sideband region) from the Signal+Background one (Signal region):
+
 <img width="440px" src="../fig/subtraction.svg" alt="Sideband Subtraction equation">
 
-Where:
+Where the normalization α factor quantifies the quantity of background present in the signal region.
 
 <img width="450px" src="../fig/alpha.svg" alt="Alpha factor equation">
 
@@ -42,7 +46,7 @@ Applying those equations we get histograms like this:
 
 * Solid blue line (Total) = particles in signal region;
 * Dashed blue line (Background) = particles in sideband regions;
-* Solid magenta line (signal) = signal histogram subtracted.
+* Solid magenta line (signal) = signal histogram (background subtracted).
 
 You will see this histogram on this exercise.
 
@@ -62,7 +66,7 @@ cd efficiency_tagandprobe
 ~~~
 {: .language-bash}
 
-To copy the ϒ dataset from a 2011 run file to your machine (requires 441M B), type:
+To copy the ϒ dataset from real data file to your machine (requires 441 MB), type:
 
 ~~~
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1Fj-rrKts8jSSMdwvOnvux68ydZcKB521' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1Fj-rrKts8jSSMdwvOnvux68ydZcKB521" -O Run2011A_MuOnia_Upsilon.root && rm -rf /tmp/cookies.txt
@@ -71,7 +75,7 @@ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download
 
 This code downloads directly from Google Drive.
 
-Run this code to download the simulated data ntupple for ϒ (requires 66 MB):
+Run this code to download the simulation ntuple for ϒ (requires 66 MB):
 
 ~~~
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1ZzAOOLCKmCz0Q6pVi3AAiYFGKEpP2efM' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1ZzAOOLCKmCz0Q6pVi3AAiYFGKEpP2efM" -O Upsilon1SToMuMu_MC_full.root && rm -rf /tmp/cookies.txt
@@ -125,9 +129,7 @@ nano settings.cpp
 ~~~
 {: .language-bash}
 
-We want to calculate **efficiencies of tracker muons**, so we don't need to measure standalone and global.
-
-With the **settings.cpp** file opened, make sure to let the variables like this:
+We want to calculate **efficiencies of tracker muons**. With the **settings.cpp** file opened, make sure to let the variables like this:
 
 ~~~
 //Canvas drawing
@@ -143,7 +145,7 @@ bool doGlobal     = false;
 ~~~
 {: .language-cpp}
 
-We wanto to calculate the efficiency of specific files that we downloaded. They name are `Run2011A_MuOnia_Upsilon.root` and `Upsilon1SToMuMu_MC_full.root` and are listed in `const char *files[]`. While **settings.cpp** is open, try to use the variable `int useFile` to run `Run2011A_MuOnia_Upsilon.root`.
+We want to calculate the efficiency using specific files that we downloaded. They name are `Run2011A_MuOnia_Upsilon.root` and `Upsilon1SToMuMu_MC_full.root` and are listed in `const char *files[]`. While **settings.cpp** is open, try to use the variable `int useFile` to run `Run2011A_MuOnia_Upsilon.root`.
 
 > ## How to do this
 >
@@ -171,7 +173,7 @@ We wanto to calculate the efficiency of specific files that we downloaded. They 
 > ~~~
 > {: .language-cpp}
 >
-> It will tell which configuration the progtam will use. So, the macro will run with the Ntupple in `files[useFile]` and the results will be stored in `directoriesToSave[useFile]`.
+> It will tell which configuration the program will use. So, the macro will run with the ntuple in `files[useFile]` and the results will be stored in `directoriesToSave[useFile]`.
 >
 > the first three files won't be used in this execise.
 {: .solution}
@@ -179,14 +181,13 @@ We wanto to calculate the efficiency of specific files that we downloaded. They 
 
 > ## About code
 >
-> Normally we need to set the variables `bool isMC` and `const char* resonance`, but at this time it is already done and set automatically for these ntupples' names.
+> Normally we need to set the variables `bool isMC` and `const char* resonance`, but at this time it is already done and set automatically for these ntuples' names.
 >
-> As a note, this code was developed for ϒ and J/ψ resonances only. We pretend to work on for Z Boson in future.
 {: .callout}
 
 ## Editting bins
 
-To change the binning, locate **PassingFailing.h**
+The code allows to define the binning of the kinematic variable, to ensure each bin is sufficiently populated, for increased robustness. To change the binning, locate **PassingFailing.h**
 
 ~~~
 cd ../classes
@@ -313,7 +314,7 @@ else
 
 The code that creates the histogram bins is located inside the conditionals and is commented. You can edit this code and uncomment to create histogram bins however you want. Instead of using a function to generate the bins, we can also define them manually.
 
-As we are going to compare the bins with fitting method, we will use the same bins. Change your the code to this:
+As we intend to compare the results between data and simulation, but also between the sideband and fitting methods, you are advised to employ the same bin choice. Change your the code to this:
 
 ~~~
 //Variable bin for pT
@@ -381,7 +382,7 @@ Run the macro.cpp:
 
 ~~~
 "../results/Upsilon Run 2011/" directory created OK
-Using "../Run2011A_MuOnia_Upsilon.root" ntupple
+Using "../Run2011A_MuOnia_Upsilon.root" ntuple
 resonance: Upsilon
 Using method 2
 Data analysed = 986100 of 986100
@@ -389,6 +390,13 @@ Data analysed = 986100 of 986100
 {: .output}
 
 In this process, more informations will be printed in terminal while plots will pop up on your screen (these plots are been saved in a folder). **It will take a couple of minutes**. The message below tells you that code has finished running:
+
+In this process, more informations will be printed in terminal while plots will pop up on your screen (these plots are been saved in a folder). If you wish to avoid this, and perhaps run a little faster, run the code instead as:
+
+~~~
+root -l -q macro.cpp
+~~~
+{: .language-bash}
 
 ~~~
 Done. All result files can be found at "../results/Upsilon Run 2011/"
@@ -406,9 +414,9 @@ root[1]
 > ~~~
 > {: .error}
 >
-> This occours when a bin of the pass histogram is greater than the respective bin in the total histogram. With sideband subtraction, depending on bins you choose, this can happen and will result in enormous error bars.
+> This occurs when the contents of a bin of the pass histogram is greater than the corresponding bin in the total histogram. With sideband subtraction, depending on bins you choose, this can happen and will result in enormous error bars.
 >
-> Just ignore them.
+> This issue may be avoided by fine-tuning the binning choice. For now, these messages may be ignored.
 > 
 {: .callout}
 
@@ -421,13 +429,13 @@ Type the command below to **quit root** and close all the created windows:
 
 ## Probe Efficiency results for Run 2011
 
-If you did everything right, your results are going to be like these:
+If all went well, your results are going to be like these:
 
 ![Efficiency plot](../fig/sideband_run2011/Efficiency_Tracker_Probe_Pt.png)
 ![Efficiency plot](../fig/sideband_run2011/Efficiency_Tracker_Probe_Eta.png)
 ![Efficiency plot](../fig/sideband_run2011/Efficiency_Tracker_Probe_Phi.png)
 
-## Preparing and running the code for simulated data
+## Preparing and running the code for simulation
 
 > ## Challenge
 >
@@ -447,7 +455,7 @@ If you did everything right, your results are going to be like these:
 >
 {: .challenge}
 
-> ## Comparison between real data and simulated data
+> ## Comparison between real data and simulation
 >
 > We'll do this in the last episode of this exercise. So the challenge above is mandatory. 
 > 
@@ -466,14 +474,14 @@ If you did everything right, your results are going to be like these:
 > ~~~
 > {: .language-bash}
 >
-> To download the J/ψ simulated data ntupple (requires 515 MB):
+> To download the J/ψ simulated data ntuple (requires 515 MB):
 >
 > ~~~
 > wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1dKLJ5RIGrBp5aIJrvOQw5lWLQSHUgEnf' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1dKLJ5RIGrBp5aIJrvOQw5lWLQSHUgEnf" -O JPsiToMuMu_mergeMCNtuple.root && rm -rf /tmp/cookies.txt
 > ~~~
 > {: .language-bash}
 >
-> As this dataset is larger, the code will run slowly, taking aroung 25 min to complete.
+> As this dataset is larger, the code will run slowly. It can take several minutes to be completed depending where the code is been running
 >
 {: .challenge}
 

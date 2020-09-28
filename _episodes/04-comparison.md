@@ -5,7 +5,7 @@ exercises: 20
 questions:
 - "How good are the results?"
 objectives:
-- "Compare efficiencies between real data and simulated data."
+- "Compare efficiencies between real data and simulations."
 - "Compare efficiencies between sideband subtraction and fitting methods."
 keypoints:
 - "There is a unique `.root` file for efficiencies in the sideband method code."
@@ -30,7 +30,7 @@ main  README.md  results  Run2011A_MuOnia_Upsilon.root  Upsilon1SToMuMu_MC_full.
 ~~~
 {: .output}
 
-A folder named `results` showed up on this folder. Lets go check it's content.
+A folder named `results` showed up on this folder. Lets go check its content.
 
 ~~~
 cd results
@@ -39,14 +39,14 @@ ls
 {: .language-bash}
 
 ~~~
-'Comparison Upsilon Sideband Run vs MC'  'Upsilon MC 2020'  'Upsilon Run 2011'
+'Comparison_Upsilon_Sideband_Run_vs_MC'  'Upsilon_MC_2020'  'Upsilon_Run_2011'
 ~~~
 {: .output}
 
-If you did every step of the sideband subtraction on this page lesson, this results should match with the results on your pc. Access one of those folders (except comparison).
+If you did every step of the sideband subtraction on this page lesson, these results should match with the results on your pc. Access one of those folders (except comparison).
 
 ~~~
-cd Upsilon\ Run\ 2011
+cd Upsilo_Run_2011
 ls
 ~~~
 {: .language-bash}
@@ -66,7 +66,7 @@ Tracker_Probe_Eta_Passing.png
 ~~~
 {: .output}
 
-Here, all the outputed plots you saw when running the sideband subtraction method are stored as a `.png`. Aside from them, there's a `generated_hist.root` that stores the efficiency in a way that we can manipulate it after. This file is needed to run the comparison between efficiencies for the sideband subtraction method. Lets look inside of this file.
+Here, all the output plots you saw when running the sideband subtraction method are stored as a `.png`. Aside from them, there's a `generated_hist.root` that stores the efficiency in a way that we can manipulate it after. This file is needed to run the comparison between efficiencies for the sideband subtraction method. Lets look inside of this file.
 
 Run this command to open `generated_hist.root` with ROOT:
 
@@ -83,7 +83,7 @@ root [1]
 ~~~
 {: .output}
 
-Let's check it's content
+Lets check its content
 
 ~~~
 new TBrowser
@@ -98,7 +98,7 @@ This is a visual navigator of a `.root` file. Here you can see the struture of `
 
 ![Invariant Mass histogram](../fig/prints/tbrowser2.png)
 
-You can double click each plot to see it's content:
+You can double click each plot to see its content:
 
 ![Invariant Mass histogram](../fig/prints/tbrowser3.png)
 
@@ -115,16 +115,16 @@ You can double click each plot to see it's content:
 {: .keypoints}
 
 
-## Comparison results between real data and simulated data for sideband method
+## Comparison results between real data and simulations for sideband method
 
 After runinng the sideband subtraction code, we get a `.root` with all the efficiencies plots inside it in two different folders:
 
-* `../results/Upsilon Run 2011/generated_hist.root`
-* `../results/Upsilon MC 2020/generated_hist.root`
+* `../results/Upsilon_Run_2011/generated_hist.root`
+* `../results/Upsilon_MC_2020/generated_hist.root`
 
 We'll get back to this on the discussion below.
 
-Head back to the `main` folder. Inside of it there is a code for the efficiency plot comparison. Let's check it out.
+Head back to the `main` folder. Inside of it there is a code for the efficiency plot comparison. Lets check it out.
 
 ~~~
 cd main
@@ -144,7 +144,7 @@ gedit compare_efficiency.cpp
 ~~~
 {: .language-bash}
 
-It's easy to prepare it for the sideband subtraction comparison. Our main editing point can be found in this part:
+Its easy to prepare it for the sideband subtraction comparison. Our main editing point can be found in this part:
 
 ~~~
 int useScheme = 0;
@@ -154,28 +154,28 @@ int useScheme = 0;
 
 //Root files and paths for Tefficiency objects inside these files
 const char* filePathsEff0[][2] = {
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Pt_Standalone_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Eta_Standalone_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Phi_Standalone_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Pt_Global_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Eta_Global_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Phi_Global_Probe_Efficiency"}
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Pt_Standalone_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Eta_Standalone_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Phi_Standalone_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Pt_Global_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Eta_Global_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Phi_Global_Probe_Efficiency"}
 };
 
 //Root files and paths for Tefficiency objects inside these files
 const char* filePathsEff1[][2] = {
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Pt_Standalone_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Eta_Standalone_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Phi_Standalone_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Pt_Global_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Eta_Global_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Phi_Global_Probe_Efficiency"}
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Pt_Standalone_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Eta_Standalone_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Phi_Standalone_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Pt_Global_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Eta_Global_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Phi_Global_Probe_Efficiency"}
 };
 
 //How comparisons will be saved
@@ -202,7 +202,7 @@ const char* resultNames[] = {
 > 
 > Plots in `const char* filePathsEff0[i]` will be compared with plots in `const char* filePathsEff1[i]`. The result will be saved as `const char* resultNames[i]`.
 
-Everything is uptodate to compare sideband subtraction's results between real data and simulations, except it is comparing standalone and global muons. As we are **not looking for standalone and global muons efficiencies and we do not have plotted these efficiences, you should **delete lines with Standalone and Global words**
+Everything is uptodate to compare sideband subtraction's results between real data and simulations, except it is comparing standalone and global muons. As we are  looking for tracker muons efficiencies only, you should **delete lines with Standalone and Global words**
 
 > ## See result scructure
 > 
@@ -216,16 +216,16 @@ Everything is uptodate to compare sideband subtraction's results between real da
 > 
 > //Root files and paths for Tefficiency objects inside these files
 > const char* filePathsEff0[][2] = {
-> 	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
-> 	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
-> 	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"}
+> 	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
+> 	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
+> 	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"}
 > };
 > 
 > //Root files and paths for Tefficiency objects inside these files
 > const char* filePathsEff1[][2] = {
-> 	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
-> 	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
-> 	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"}
+> 	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
+> 	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
+> 	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"}
 > };
 > 
 > //How comparisons will be saved
@@ -265,16 +265,16 @@ If everything went right, the message you'll see in terminal at end of the proce
 ~~~
 
 Use Scheme: 0
-Done. All result files can be found at "../results/Comparison Upsilon Sideband Run vs MC/"
+Done. All result files can be found at "../results/Comparison_Upsilon_Sideband_Run_vs_MC/"
 root[1]
 ~~~
 {: .output}
 
 And as output plots comparsion, you get:
 
-![Invariant Mass histogram](../fig/Comparison Upsilon Sideband Run vs MC/Muon_Pt_Tracker_Probe_Efficiency.png)
-![Invariant Mass histogram](../fig/Comparison Upsilon Sideband Run vs MC/Muon_Eta_Tracker_Probe_Efficiency.png)
-![Invariant Mass histogram](../fig/Comparison Upsilon Sideband Run vs MC/Muon_Phi_Tracker_Probe_Efficiency.png)
+![Invariant Mass histogram](../fig/Comparison_Upsilon_Sideband_Run_vs_MC/Muon_Pt_Tracker_Probe_Efficiency.png)
+![Invariant Mass histogram](../fig/Comparison_Upsilon_Sideband_Run_vs_MC/Muon_Eta_Tracker_Probe_Efficiency.png)
+![Invariant Mass histogram](../fig/Comparison_Upsilon_Sideband_Run_vs_MC/Muon_Phi_Tracker_Probe_Efficiency.png)
 
 Now you can type the command below to **quit root** and close all created windows:
 
@@ -283,9 +283,9 @@ Now you can type the command below to **quit root** and close all created window
 ~~~
 {: .language-bash}
 
-## How fitting subtraction method code stores it's files
+## How fitting method code stores its files
 
-To do the next part, first you need to understand how the fitting method code saves it's files in a different way to the sideband subtraction method code. Let's look at how they are saved.
+To do the next part, first you need to understand how the fitting method code saves its files in a different way to the sideband subtraction method code. Lets look at how they are saved.
 
 If you look inside thr results folder for fitting method, you will see another folder named `trackermuon`. Inside of it you'll see:
 
@@ -310,7 +310,7 @@ root [1]
 ~~~
 {: .output}
 
-Now lets look at it's content.
+Now lets look at its content.
 
 ~~~
 new TBrowser
@@ -327,7 +327,7 @@ It has only one plot, because the others are in different files.
 > 
 {: .keypoints}
 
-## Comparison results between real data and simulated data for fitting method
+## Comparison results between real data and simulations for fitting method
 
 Go back to the `main` folder.
 
@@ -359,16 +359,16 @@ int useScheme = 0;
 
 //Root files and paths for Tefficiency objects inside these files
 const char* filePathsEff0[][2] = {
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon Run 2011/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"}
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_Run_2011/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"}
 };
 
 //Root files and paths for Tefficiency objects inside these files
 const char* filePathsEff1[][2] = {
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
-	{"../results/Upsilon MC 2020/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"}
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Pt_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Eta_Tracker_Probe_Efficiency"},
+	{"../results/Upsilon_MC_2020/generated_hist.root", "efficiency/plots/Muon_Phi_Tracker_Probe_Efficiency"}
 };
 
 //How comparisons will be saved
@@ -424,17 +424,17 @@ Changing `[PATH_TO_RESULT_FITTING_FOLDER]` to the relative path to result folder
 Doing this and running the program with:
 
 ~~~
-root -l .x compare_efficiency.cpp
+root -l compare_efficiency.cpp
 ~~~
 {: .language-bash}
 
 Should get you these results:
 
-![Invariant Mass histogram](../fig/Comparison Upsilon Fitting Run vs MC/Muon_Pt_Tracker_Probe_Efficiency.png)
-![Invariant Mass histogram](../fig/Comparison Upsilon Fitting Run vs MC/Muon_Eta_Tracker_Probe_Efficiency.png)
-![Invariant Mass histogram](../fig/Comparison Upsilon Fitting Run vs MC/Muon_Phi_Tracker_Probe_Efficiency.png)
+![Invariant Mass histogram](../fig/Comparison_Upsilon_Fitting_Run_vs_MC/Muon_Pt_Tracker_Probe_Efficiency.png)
+![Invariant Mass histogram](../fig/Comparison_Upsilon_Fitting_Run_vs_MC/Muon_Eta_Tracker_Probe_Efficiency.png)
+![Invariant Mass histogram](../fig/Comparison_Upsilon_Fitting_Run_vs_MC/Muon_Phi_Tracker_Probe_Efficiency.png)
 
-## Comparison results between real data for sideband and fitting method
+## Comparison results between data from the sideband and data from the fitting method
 
 > ## Challenge
 >
@@ -442,7 +442,7 @@ Should get you these results:
 > Notice that:
 >
 > * Real data = Run 2011
-> * Simulated data = Monte Carlo = MC
+> * Simulations = Monte Carlo = MC
 >
 > Tip: you just need to change what you saw in this page to do this comparison.
 >
@@ -458,9 +458,9 @@ Should get you these results:
 
 ---
 
-> ## Extra challenge - recreate Ntupples
+> ## Extra - recreate ntuples
 >
-> If you are looking for an extra exercise, you can try to apply the same thing that you did, changing some variables you saw. Try to get results from a J/ψ decaying in dimuons ntuple @7 TeV.
+> If you are looking go far than this workshop, you can try to recreate those ntuples we used here. Try to get results from a J/ψ decaying in dimuons ntuple @7 TeV. The code used to create them can be [found here](https://github.com/sandrofonseca/TagAndProbe).
 > 
 > Concerning the datasets used to produce these extra exercises, you can find them in these links below:
 >
@@ -468,15 +468,8 @@ Should get you these results:
 > * [ϒ Monte Carlo simulations](http://opendata.cern.ch/record/1522)
 > * [J/ψ Monte Carlo simulations](http://opendata.cern.ch/record/1335)
 >
-> Information about the triggers:
->
-> * **HLT Triggers Path (J/ψ - Data/MC)**: HLT_Dimuon10_Jpsi_Barrel_v*
-> * **HLT Triggers Path (ϒ - Data)**: HLT_Dimuon0_Barrel_Upsilon 
-> * **HLT Triggers Path (ϒ - MC)**: HLT_Dimuon0_Upsilon 
-> 
-> This is work in progress adapted from CMS official code to create cms Open Data Tag and Probe ntuples.
+> This is work in progress adapted from CMS official code to create CMS Open Data Tag and Probe ntuples.
 >
 {: .challenge}
-
 
 {% include links.md %}
