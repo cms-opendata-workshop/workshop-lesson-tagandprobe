@@ -10,8 +10,8 @@ objectives:
 - "Learn how to implement this method using ROOT library for c++"
 
 keypoints:
-- "Skrrt."
-- "There are essentially three important files in an EDAnalyzer package, the source code in c++, the python config file and a Buildfile for tracking dependencies."
+- "You'll only need to change the ```/src/DoFit.cpp``` file if some of the fits aren't usable. Apart from that everything will be done on the ```Efficiency.C``
+- "Documentation available [here](https://github.com/AthomsG/LIP_INTERNSHIP/blob/master/Documentation.md)"
 ---
 ## Prerequisite
 
