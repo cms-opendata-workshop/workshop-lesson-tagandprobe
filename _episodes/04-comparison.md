@@ -3,21 +3,21 @@ title: "Results comparison"
 teaching: 5
 exercises: 20
 questions:
-- "How well it got?"
+- "How good are the results?"
 objectives:
 - "Compare efficiencies between real data and simulated data."
-- "Compare efficiencies between sideband subtraction and fitting."
+- "Compare efficiencies between sideband subtraction and fitting methods."
 keypoints:
-- "There is a unique `.root` file for efficiencies in sideband method code."
+- "There is a unique `.root` file for efficiencies in the sideband method code."
 - "There is a `.root` file for each efficiencies in fitting method code."
 ---
 
 ## How sideband subtraction method code stores its files
 
 
-Sideband subtraction saves every efficiency plot in `efficiency/plots/` folder inside a single `generated_hist.root` file. Lets check it!
+the Sideband subtraction code saves every efficiency plot in `efficiency/plots/` folder inside a single `generated_hist.root` file. Lets check it!
 
-You probably now are in `main` directory. Lets go back a directory above.
+You're probably on the `main` directory. Lets go back a directory.
 
 ~~~
 cd ..
@@ -30,7 +30,7 @@ main  README.md  results  Run2011A_MuOnia_Upsilon.root  Upsilon1SToMuMu_MC_full.
 ~~~
 {: .output}
 
-Now, a folder named `results` appeared on this folder. Lets go check inside.
+A folder named `results` showed up on this folder. Lets go check it's content.
 
 ~~~
 cd results
@@ -43,7 +43,7 @@ ls
 ~~~
 {: .output}
 
-If you did every step of sideband subtraction and this page lesson, this results should match with results on your pc. Go inside one of those folders (except comparison).
+If you did every step of the sideband subtraction on this page lesson, this results should match with the results on your pc. Access one of those folders (except comparison).
 
 ~~~
 cd Upsilon\ Run\ 2011
@@ -66,9 +66,9 @@ Tracker_Probe_Eta_Passing.png
 ~~~
 {: .output}
 
-Here is stored as `.png` all outputed code plots you saw running sideband subtraction method. Aside of them there is the `generated_hist.root` with stores the efficiency a way that we can manipulate after. This is a needed file to run comparison between efficiencies for sideband subtraction method. Lets look inside of this file.
+Here, all the outputed plots you saw when running the sideband subtraction method are stored as a `.png`. Aside from them, there's a `generated_hist.root` that stores the efficiency in a way that we can manipulate it after. This file is needed to run the comparison between efficiencies for the sideband subtraction method. Lets look inside of this file.
 
-Run to open this file with ROOT:
+Run this command to open `generated_hist.root` with ROOT:
 
 ~~~
 root -l generated_hist.root
@@ -83,48 +83,48 @@ root [1]
 ~~~
 {: .output}
 
-Now lets see it content
+Let's check it's content
 
 ~~~
 new TBrowser
 ~~~
 {: .language-bash}
 
-Now you see in your screen this:
+You should see something like this:
 
 ![Invariant Mass histogram](../fig/prints/tbrowser0.png)
 
-This is a visual navigator of a `.root` file. Here you can see the struture of `generated_hist.root`. Go double clicking on folders to open it and see your content. The Efficiency plots we see are stored in `efficiency/plots/` like we see here:
+This is a visual navigator of a `.root` file. Here you can see the struture of `generated_hist.root`. Double click the folders to open them and see their content. The Efficiency plots we see are stored in `efficiency/plots/`:
 
 ![Invariant Mass histogram](../fig/prints/tbrowser2.png)
 
-You can double click each plot to see it content too:
+You can double click each plot to see it's content:
 
 ![Invariant Mass histogram](../fig/prints/tbrowser3.png)
 
 > ## Tip
 >
-> To close this window, click on terminal and press <kbd>Ctrl + C</kbd>. This command stops any process in terminal.
+> To close this window, click on terminal and press <kbd>Ctrl + C</kbd>. This command stops any processes happening in the terminal.
 > 
 {: .callout}
 
 > ## Key Point
 > 
-> * As you see, the `.root` file has a path itself and efficiencies plots inside them has paths too!
+> * As you see, the `.root` file has a path inside and the efficiencies plots have paths inside them as well!
 > 
 {: .keypoints}
 
 
 ## Comparison results between real data and simulated data for sideband method
 
-After runinng sideband subtraction code, we get `.root` with all efficiencies plots inside it in two different folders:
+After runinng the sideband subtraction code, we get a `.root` with all the efficiencies plots inside it in two different folders:
 
 * `../results/Upsilon Run 2011/generated_hist.root`
 * `../results/Upsilon MC 2020/generated_hist.root`
 
-It will be seen on discussing below.
+We'll get back to this on the discussion below.
 
-Go back inside `main` folder. Inside of it is a code for efficiency plot comparison. Lets check it out.
+Head back to the `main` folder. Inside of it there is a code for the efficiency plot comparison. Let's check it out.
 
 ~~~
 cd main
@@ -144,7 +144,7 @@ gedit compare_efficiency.cpp
 ~~~
 {: .language-bash}
 
-It's easy to prepare it for sideband subtraction comparison. Our main edition point can be found in this part:
+It's easy to prepare it for the sideband subtraction comparison. Our main editing point can be found in this part:
 
 ~~~
 int useScheme = 0;
@@ -195,14 +195,14 @@ const char* resultNames[] = {
 
 > In the scope above we see:
 >
-> * `int useScheme` represents which comparison are you doing.
-> * `const char* filePathsEff0` is a array with location of the first plots.
-> * `const char* filePathsEff1` is a array with location of the second plots.
-> * `const char resultNames` is a array with names which comparison will be saved.
+> * `int useScheme` represents which comparison you are doing.
+> * `const char* filePathsEff0` is an array with location of the first plots.
+> * `const char* filePathsEff1` is an array with location of the second plots.
+> * `const char resultNames` is an array with names which comparison will be saved.
 > 
 > Plots in `const char* filePathsEff0[i]` will be compared with plots in `const char* filePathsEff1[i]`. The result will be saved as `const char* resultNames[i]`.
 
-Everything is uptodate to compare sideband subtractions results between real data and simulations, except it is comparing standalone and global muons. As we are **not looking for standalone and global muons efficiencies and we do not have plotted these efficiences, you should **delete lines with Standalone and Global words**
+Everything is uptodate to compare sideband subtraction's results between real data and simulations, except it is comparing standalone and global muons. As we are **not looking for standalone and global muons efficiencies and we do not have plotted these efficiences, you should **delete lines with Standalone and Global words**
 
 > ## See result scructure
 > 
@@ -260,7 +260,7 @@ Now run **compare_efficiency.cpp**:
 ~~~
 {: .language-bash}
 
-If everything went right, the message you should see in terminal at end of process is:
+If everything went right, the message you'll see in terminal at end of the process is:
 
 ~~~
 
@@ -270,7 +270,7 @@ root[1]
 ~~~
 {: .output}
 
-And as output plots comparsion you got:
+And as output plots comparsion, you get:
 
 ![Invariant Mass histogram](../fig/Comparison Upsilon Sideband Run vs MC/Muon_Pt_Tracker_Probe_Efficiency.png)
 ![Invariant Mass histogram](../fig/Comparison Upsilon Sideband Run vs MC/Muon_Eta_Tracker_Probe_Efficiency.png)
@@ -283,19 +283,19 @@ Now you can type the command below to **quit root** and close all created window
 ~~~
 {: .language-bash}
 
-## How fitting subtraction method code stores its files
+## How fitting subtraction method code stores it's files
 
-To do the next part, first you need to understand fitting method code saves it's files in a different way sideband subtraction method code does. Lets look how is saved.
+To do the next part, first you need to understand how the fitting method code saves it's files in a different way to the sideband subtraction method code. Let's look at how they are saved.
 
-If you look inside result folder for fitting method, you will see another folder named `Tracker`. Inside of it you will see:
+If you look inside thr results folder for fitting method, you will see another folder named `trackermuon`. Inside of it you'll see:
 
 ![Invariant Mass histogram](../fig/prints/fitting_tracker.png)
 
-Inside of them, there is two files:
+Inside of them, there are two files:
 
 ![Invariant Mass histogram](../fig/prints/fitting_root.png)
 
-IF you go with you terminal to this folder and run this command, you will see that the result files has only one plot.\
+If you go with your terminal to this folder and run this command, you'll see that the result files only have one plot.\
 
 ~~~
 root -l Efficiency_Run2011.root
@@ -310,7 +310,7 @@ root [1]
 ~~~
 {: .output}
 
-Now lets look it content.
+Now lets look at it's content.
 
 ~~~
 new TBrowser
@@ -323,13 +323,13 @@ It has only one plot, because the others are in different files.
 
 > ## Key Point
 > 
-> * There is a `.root` file for each efficiency plot created with fitting method.
+> * There is a `.root` file for each efficiency plot created with the fitting method.
 > 
 {: .keypoints}
 
 ## Comparison results between real data and simulated data for fitting method
 
-Go back to `main` folder.
+Go back to the `main` folder.
 
 ~~~
 cd main
@@ -349,7 +349,7 @@ gedit compare_efficiency.cpp
 ~~~
 {: .language-bash}
 
-There is your code now:
+This is how your code should look like now:
 
 ~~~
 int useScheme = 0;
@@ -380,7 +380,7 @@ const char* resultNames[] = {
 ~~~
 {: .language-cpp}
 
-There is three thing to do:
+You have to do three things:
 
 1. Edit `int useScheme` value to current analysis.
 
@@ -388,7 +388,7 @@ There is three thing to do:
 
 1. Change all first item of arrays in `const char* filePathsEff1[]` and `const char* filePathsEff1[]` to the location where created file is.
 
-In the end of task, you code should be something like this:
+In the end of task, your code should be something like this:
 
 ~~~
 int useScheme = 1;
@@ -421,14 +421,14 @@ const char* resultNames[] = {
 
 Changing `[PATH_TO_RESULT_FITTING_FOLDER]` to the relative path to result folder for fitting method.
 
-Doing it and running the program, by:
+Doing this and running the program with:
 
 ~~~
 root -l .x compare_efficiency.cpp
 ~~~
 {: .language-bash}
 
-You get this reults:
+Should get you these results:
 
 ![Invariant Mass histogram](../fig/Comparison Upsilon Fitting Run vs MC/Muon_Pt_Tracker_Probe_Efficiency.png)
 ![Invariant Mass histogram](../fig/Comparison Upsilon Fitting Run vs MC/Muon_Eta_Tracker_Probe_Efficiency.png)
@@ -438,13 +438,13 @@ You get this reults:
 
 > ## Challenge
 >
-> Using what you did before, try to mixuture them and plot a comparison **between real data for sideband method and real data** for fitting method and get a analysis.
+> Using what you did before, try to mix them and plot a comparison **between real data for sideband method and real data** for sthe fitting method and get an analysis.
 > Notice that:
 >
 > * Real data = Run 2011
 > * Simulated data = Monte Carlo = MC
 >
-> Tip: you just need change what you saw in this page to do this comparison.
+> Tip: you just need to change what you saw in this page to do this comparison.
 >
 {: .challenge}
 
@@ -452,7 +452,7 @@ You get this reults:
 
 > ## Extra challenge
 >
-> As you did last 2 extras challenges, now try to redo this exercise comparing results between challenges.
+> As you did with the last 2 extras challenges, try to redo this exercise comparing results between challenges.
 >
 {: .challenge}
 
@@ -460,21 +460,21 @@ You get this reults:
 
 > ## Extra challenge - recreate Ntupples
 >
-> If you are looking for an extra exercise, you can try to apply the same you did, changing some variables you saw and try to get results from a J/ψ decaying in dimuons ntuple @ 7 TeV.
+> If you are looking for an extra exercise, you can try to apply the same thing that you did, changing some variables you saw. Try to get results from a J/ψ decaying in dimuons ntuple @7 TeV.
 > 
-> Concerning the datasets used to produce these extra exercises, you can find in these links below:
+> Concerning the datasets used to produce these extra exercises, you can find them in these links below:
 >
 > * [Real data (2011 legacy)](http://opendata.cern.ch/record/27)
 > * [ϒ Monte Carlo simulations](http://opendata.cern.ch/record/1522)
 > * [J/ψ Monte Carlo simulations](http://opendata.cern.ch/record/1335)
 >
-> Concerning about triggers:
+> Information about the triggers:
 >
 > * **HLT Triggers Path (J/ψ - Data/MC)**: HLT_Dimuon10_Jpsi_Barrel_v*
 > * **HLT Triggers Path (ϒ - Data)**: HLT_Dimuon0_Barrel_Upsilon 
 > * **HLT Triggers Path (ϒ - MC)**: HLT_Dimuon0_Upsilon 
 > 
-> It is a work in progress adapted from CMS official code to create cms Open Data Tag and Probe ntuples.
+> This is work in progress adapted from CMS official code to create cms Open Data Tag and Probe ntuples.
 >
 {: .challenge}
 
