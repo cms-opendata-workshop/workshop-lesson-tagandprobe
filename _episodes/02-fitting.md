@@ -425,7 +425,7 @@ root
 ~~~
 {: .language-bash}
 
-<img width="500px" src="../fig/TBrowser_efficiency.png">
+<img width="700px" src="../fig/TBrowser_efficiency.png">
 
 A window like this should have popped up.
 If you click on ``Efficiency_Run2011.root``, a plot will show up with the efficiency value for each bin!
@@ -451,5 +451,12 @@ and run the macro again.
 You should get something like the following result. If so, repeat this process for the two quantites left to go, Eta and Phi!
 
 <img width="500px" src="../fig/Efficiency_thomas.png">
+
+> ## Extra challenge
+>
+> Fancy some more work? download [this](https://drive.google.com/drive/folders/1YytJ7iTVYToUZemYIDLqr13wTjIYGERP?usp=sharing) J/ψ dataset and try out the new methods you just learned!
+>You'll have to change the DoFit.cpp function since J/ψ's only peak is made up of a crystall ball and a gaussian curve.
+>Good luck!
+{: .challenge}
 
 {% include links.md %}
