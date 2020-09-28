@@ -3,14 +3,14 @@ title: "Sideband subtraction method"
 teaching: 4
 exercises: 25
 questions:
-- "What is sideband subtraction?"
-- "How implement sideband subtraction?"
+- "What is the sideband subtraction methof?"
+- "How to implement it?"
 objectives:
 - "Learn how to set bins in a sideband subtraction tool."
-- "Get efficiency by sideband subtraction real and simulated data."
+- "Get efficiency by using the sideband subtraction on real and simulated data."
 keypoints:
 - "There is a file in **main/config/settings.cpp** where you can edit some options."
-- "You can edit the binnig in **main/classes/PassingFailing.h** file."
+- "You can edit the binnig in the **main/classes/PassingFailing.h** file."
 - "The main code is located in **main/macro.cpp**"
 ---
 
@@ -18,7 +18,7 @@ keypoints:
 
 The efficiency is calculated using **only signal muons**. So we need a way to extract signal from the dataset. You've used the fitting method and now you'll meet the sideband subtraction method.
 
-This method consists in choosing sideband and signal regions in invariant mass distribution. The sideband regions are supposed to have only background particles and the signal region has background and signal particle.
+This method consists in choosing sideband and signal regions in invariant mass distribution. The sideband regions have background particles and the signal region has background and signal particle.
 
 ![Invariant Mass histogram](../fig/InvariantMass_Tracker_region.png)
 
