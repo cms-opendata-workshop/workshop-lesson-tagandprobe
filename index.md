@@ -10,7 +10,7 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 >
 > Welcome.  In this lesson you will:
 > - Learn what Tag & Probe method is.
-> - Plotting efficiencies distribution for several variables using Tag & Probe Method using Upsilon resonance decaying dimuon.
+> - Plotting efficiencies distribution for several variables using Tag & Probe Method using ϒ (Upsilon) resonance decaying dimuon.
 > - Learn two methods for signal extraction from a dataset.
 > - Learn how to use two efficiency measurement tools.
 {: .objectives}
