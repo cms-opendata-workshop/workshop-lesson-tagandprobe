@@ -443,7 +443,7 @@ Check that you have both ```Efficiency_Run2011.root``` and ```Efficiency_MC.root
 If so, uncomment:
 
 ~~~
-//compare_efficiency(quantity, "Efficiency\ Result/Pt/Efficiency_Run2011.root", "Efficiency\ Result/Pt/Efficiency_MC.root");
+//compare_efficiency(quantity, "Efficiency_Result/Pt/Efficiency_Run2011.root", "Efficiency_Result/Pt/Efficiency_MC.root");
 ~~~
 {: .language-cpp}
 
