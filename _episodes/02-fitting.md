@@ -10,6 +10,7 @@ objectives:
 - "Learn how to implement this method using ROOT library for c++"
 
 keypoints:
+- "The dataset for this tutorial contemplates one Muon Id (Tracker Muon) with it's three quantities (pT, Eta, Phi)"
 - "You'll only need to change the ```/src/DoFit.cpp``` file if some of the fits aren't usable. Apart from that everything will be done on the ```Efficiency.C```"
 - "Documentation available [here](https://github.com/AthomsG/LIP_INTERNSHIP/blob/master/Documentation.md)"
 ---
@@ -77,7 +78,7 @@ It is useful to have an idea of the distribution of the quantity we want to stud
 
 ~~~
 root T\&P_UPSILON_DATA.root
-[0]UPSILON_DATA->Draw("ProbeMuon_Pt")
+UPSILON_DATA->Draw("ProbeMuon_Pt")
 ~~~
 {: .language-bash}
 
@@ -86,9 +87,9 @@ root T\&P_UPSILON_DATA.root
 Hmm.. seems like our domain is larger than we need it to be. To fix this, we can apply a contraint to our plot. Try:
 
 ~~~
-[1]UPSILON_DATA->Draw("ProbeMuon_Pt", "ProbeMuon_Pt < 20")
+UPSILON_DATA->Draw("ProbeMuon_Pt", "ProbeMuon_Pt < 20")
 ~~~
-{: language-bash}
+{: .language-bash}
 
 <img width="500px" src="../fig/zoom.png">
 
