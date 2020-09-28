@@ -445,12 +445,11 @@ If so, uncomment:
 ~~~
 //compare_efficiency(quantity, "Efficiency\ Result/Pt/Efficiency_Run2011.root", "Efficiency\ Result/Pt/Efficiency_MC.root");
 ~~~
-{: .language-bash}
+{: .language-cpp}
 
 and run the macro again.
 You should get something like the following result. If so, repeat this process for the two quantites left to go, Eta and Phi!
 
 <img width="500px" src="../fig/Efficiency_thomas.png">
-
 
 {% include links.md %}
