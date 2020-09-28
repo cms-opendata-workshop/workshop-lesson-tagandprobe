@@ -16,24 +16,30 @@ keypoints:
 
 ## What is tag and probe method?
 
-The tag and probe method consists calculating the efficiency of a dataset without depending on simulations. As it does not need simulations, there are necessary use known resonances as J/ψ, ϒ and Z Boson. This code is prepared to work with J/ψ and Upsilon (1S) resonances.
+The **tag and probe** method is a **data-driven technique** for measuring particle detection efficiencies. It is based on the decays of known resonances (e.g. J/ψ, ϒ and Z) to pairs of the particles being studied. In this exercise, these particles are muons, and the ϒ(1S) resonance is nominally used.
+
+(The efficiencies are extracted from the data directly; it involves no use of simulation, and it’s results are used to calibrate simulations.)
 
 ## What is "tag" and "probe"?
 
-In dimuons resonances we work with at least two muons which are labeled as tag and probe:
+The resonance decays to a pair of particles: the tag and the probe. 
 
-* Tag muon = well identified, triggered muon (tight selection criteria)
-* Probe muon = unbiased set of the desired particle type with a very loose selection criteria
+* Tag muon = well identified, triggered muon (tight selection criteria).
+* Probe muon = unbiased set of muon candidates (very loose selection criteria), either passing or failing the criteria for which the efficiency is to be measured.
 
 ## How to get efficiency?
 
-The simple efficiency definition worked so on in this code is:
+The efficiency is given by the fraction of probe muons that pass the criteria:
 
 <img width="300px" src="../fig/efficiency.svg" alt="Efficiency equation">
 
-In this workshop, the passing particles that we are evaluating efficiency are **Tracker muons** and the equation above returns the resonance reconstruction efficiency. In the section below, we are making a short description of the Muon Identification and Reconstruction definition used by CMS experiment.
+The denominator corresponds to the number of resonance candidates (tag+probe pairs) reconstructed in the dataset. The numerator corresponds to the subset for which the probe passes the criteria. 
+
+The tag+probe invariant mass distribution is used to select only signal, that is, only true Y(1S) candidates decaying to dimuons. This is achieved in this exercise with two methods: fitting and side-band-subtraction. 
 
 ## CMS Muon identification reconstruction
+
+In this workshop, the passing particles for which we are evaluating the efficiency are **Tracker muons**.  We present here a short description of the Muon Identification and Reconstruction employed in the CMS experiment at the LHC.
 
 ![CMS muon id](../fig/tracker_muon.png)
 
