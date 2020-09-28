@@ -28,7 +28,7 @@ First, a brief explanaiton of the method we'll be studying.
 The fitting method consists in dividing the quantity we want to use to calculate the efficiency into a certain amout of bins and then fitting the invariant mass of the muons (All and Passing) on the specified region. The fit allows us to divide between signal and background.
 To compute the efficiency we simply divide the yield from the fit of the Passing muons by the yield of the fit of All the muons. The following image tries to illustrate this idea.
 
-<img width="500px" src="../fig/esquema.png">
+<img width="700px" src="../fig/esquema.png">
 
 > ## Important note
 >In this exercise, since the Monte Carlo data provided only has information about the first peak (1S) of the Upsilon resonance we will only consider the yield from the 1S on the data from the 2011 Run in order to compare the efficiency of both datasets.
