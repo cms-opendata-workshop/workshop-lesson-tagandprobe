@@ -10,7 +10,7 @@ objectives:
 - "Learn how to implement this method using ROOT library for c++"
 
 keypoints:
-- "You'll only need to change the ```/src/DoFit.cpp``` file if some of the fits aren't usable. Apart from that everything will be done on the ```Efficiency.C```
+- "You'll only need to change the ```/src/DoFit.cpp``` file if some of the fits aren't usable. Apart from that everything will be done on the ```Efficiency.C```"
 - "Documentation available [here](https://github.com/AthomsG/LIP_INTERNSHIP/blob/master/Documentation.md)"
 ---
 ## Prerequisite
