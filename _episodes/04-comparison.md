@@ -39,7 +39,7 @@ ls
 {: .language-bash}
 
 ~~~
-'Comparison_Upsilon_Sideband_Run_vs_MC'  'Upsilon_MC_2020'  'Upsilon_Run_2011'
+Comparison_Upsilon_Sideband_Run_vs_MC  Upsilon_MC_2020  Upsilon_Run_2011
 ~~~
 {: .output}
 
