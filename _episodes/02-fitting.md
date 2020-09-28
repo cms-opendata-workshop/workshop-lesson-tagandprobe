@@ -49,6 +49,7 @@ Attaching file T&P_UPSILON_DATA.root as _file0...
 U(TFile *) 0x7fe2f34ca270
 ~~~
 {: .output}
+Remember that the units of the x axis are GeV/c.
 
 Now, before we start fitting the invariant mass it's important to look at it's shape first. To visualize our data's invariant mass, do:
 
