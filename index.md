@@ -18,6 +18,7 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 > ## Prerequisites
 > In order to complete this lesson you need
 > - [ROOT CERN](https://root.cern/install/) 6.22 or later installed.
+> - Internet connection.
 > - A basic understanding of terminal commands.
 {: .prereq}
 

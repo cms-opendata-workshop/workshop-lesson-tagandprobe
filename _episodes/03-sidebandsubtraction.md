@@ -389,17 +389,17 @@ Data analysed = 986100 of 986100
 ~~~
 {: .output}
 
-In this process, more informations will be printed in terminal while plots will pop up on your screen (these plots are been saved in a folder). **It will take a couple of minutes**. The message below tells you that code has finished running:
-
 In this process, more informations will be printed in terminal while plots will pop up on your screen (these plots are been saved in a folder). If you wish to avoid this, and perhaps run a little faster, run the code instead as:
 
 ~~~
-root -l -q macro.cpp
+root -l -b -q macro.cpp
 ~~~
 {: .language-bash}
 
+The message below tells you that code has finished running:
+
 ~~~
-Done. All result files can be found at "../results/Upsilon Run 2011/"
+Done. All result files can be found at "../results/Upsilon_Run_2011/"
 
 root[1]
 ~~~
@@ -445,7 +445,7 @@ If all went well, your results are going to be like these:
 > > 
 > > You will need the redo the steps above, setting:
 > > ~~~
-> > int useFile = 3;
+> > int useFile = 4;
 > > ~~~
 > > {: .language-cpp}
 > >

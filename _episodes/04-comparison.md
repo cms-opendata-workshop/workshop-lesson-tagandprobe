@@ -46,7 +46,7 @@ Comparison_Upsilon_Sideband_Run_vs_MC  Upsilon_MC_2020  Upsilon_Run_2011
 If you did every step of the sideband subtraction on this page lesson, these results should match with the results on your pc. Access one of those folders (except comparison).
 
 ~~~
-cd Upsilo_Run_2011
+cd Upsilon_Run_2011
 ls
 ~~~
 {: .language-bash}
