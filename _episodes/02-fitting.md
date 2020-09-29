@@ -35,6 +35,7 @@ The procedure is applied after splitting the dataset in bins of a kinematic vari
 Let's start exploring our dataset. From the cloned directory, type:
 
 ~~~
+cd DATA/Upsilon/trackermuon
 root T\&P_UPSILON_DATA.root
 ~~~
 {: .language-bash}
