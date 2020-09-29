@@ -1,6 +1,6 @@
 ---
 title: "The Fitting Method"
-teaching: 4
+teaching: 5
 exercises: 25
 questions:
 - "What is this fitting method?"
