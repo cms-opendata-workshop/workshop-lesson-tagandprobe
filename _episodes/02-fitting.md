@@ -411,12 +411,12 @@ To plot the efficiency we'll the use the ``/src/get_efficiency.cpp`` function.
 
 to run your code, type:
 ~~~
-root Efficiency.C
+root Efficiency.C -q
 ~~~
 {: .language-bash}
 
-when the macro stops doing its thing, you should have 2 new files on your working directory:  ``Efficiency_Run2011.root`` and ``Histograms.root``.
-The first contains the efficiency we calculated! the second file is used to redo any unusable fits.
+when the macro stops doing its thing, you should have 2 new files. One on your working directory: ```Histograms.root```, and another one ```Efficiency_Run2011.root``` located at ```/Efficiency Result/Pt```.
+The second contains the efficiency we calculated! the first file is used to redo any unusable fits.
 To open ``Efficiency_Run2011.root``, on your working directory type:
 
 ~~~
