@@ -420,7 +420,7 @@ To open ``Efficiency_Run2011.root``, on your working directory type:
 
 ~~~
 root
-[0] new TBrowser
+new TBrowser
 ~~~
 {: .language-bash}
 
