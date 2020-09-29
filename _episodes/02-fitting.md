@@ -75,7 +75,6 @@ We'll start by calculating the efficiency as a function of pT.
 It is useful to have an idea of the distribution of the quantity we want to study. In order to do this, we’ll repeat the steps perviously used to plot the invariant mass, but now for the **ProbeMuon_Pt** variable.
 
 ~~~
-root T\&P_UPSILON_DATA.root
 UPSILON_DATA->Draw("ProbeMuon_Pt")
 ~~~
 {: .language-bash}
