@@ -28,7 +28,8 @@ Current maintainers of this lesson are
 
 <ul>
   <li>[Allan Jales](https://github.com/allanjales)</li>
-  <li>[Thomas Gaehtgens](https://github.com/AthomsG)
+  <li>[Thomas Gaehtgens](https://github.com/AthomsG)</li>
+</ul>
 
 
 ## Authors
