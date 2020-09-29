@@ -1,7 +1,7 @@
 ---
 title: "The Fitting Method"
 teaching: 5
-exercises: 40
+exercises: 25
 questions:
 - "What is this fitting method?"
 - "how do we use it to calculate the efficiency?"
@@ -10,7 +10,7 @@ objectives:
 - "Learn how to implement this method using ROOT library for c++"
 
 keypoints:
-- "The dataset for this tutorial contemplates one Muon Id (Tracker Muon) with it's three quantities (pT, Eta, Phi)"
+- "The dataset for this tutorial contemplates one Muon Id (Tracker Muon) and further contains the three kinematic variables (pT, Eta, Phi)"
 - "You'll only need to change the ```/src/DoFit.cpp``` file if some of the fits aren't usable. Apart from that everything will be done on the ```Efficiency.C```"
 - "Documentation available [here](https://github.com/AthomsG/LIP_INTERNSHIP/blob/master/Documentation.md)"
 ---
@@ -25,20 +25,17 @@ git clone https://github.com/AthomsG/CMS-tutorial
 
 ## The Fitting Method
 
-First, a brief explanaiton of the method we'll be studying.
-The fitting method consists in dividing the quantity we want to use to calculate the efficiency into a certain amout of bins and then fitting the invariant mass of the muons (All and Passing) on each of the selected bins. The fit allows us to divide between signal and background.
-To compute the efficiency we simply divide the yield from the fit of the Passing muons by the yield of the fit of All the muons. The following image tries to illustrate this idea.
+First, a brief explanation of the method we’ll be studying. It consists in fitting the invariantmass of the tag+probe pairs, in the two categories: passing probes, and all probes. 
+The fit allows to statistically discriminate between signal and background. To compute the efficiency we simply divide the signal yield from the fits to the Passing category by the signal yield from the fit the inclusive (All) category. The following image illustrates the procedure.
+The procedure is applied after splitting the dataset in bins of a kinematic variable of theprobe (e.g. the traverse momentum); as such, the efficiency will be measured as a functionof that quantity.
 
 <img width="700px" src="../fig/esquema.png">
 
-> ## Important note
->In this exercise, since the Monte Carlo data provided only has information about the first peak (1S) of the Upsilon resonance we will only consider the yield from the 1S on the data from the 2011 Run in order to compare the efficiency of both datasets.
-> 
-{: .callout}
 
 Let's start exploring our dataset. From the cloned directory, type:
 
 ~~~
+cd DATA/Upsilon/trackermuon
 root T\&P_UPSILON_DATA.root
 ~~~
 {: .language-bash}
@@ -62,7 +59,7 @@ UPSILON_DATA->Draw("InvariantMass")
 
 If you got the previous result, we're ready to go.
 
-The dataset used in this exercise consists of 986100 entries (muons) with an associated invariant mass, pT, eta, phi and a binary **PassingProbeTrackingMuon** that is 1 in case the corresponding muon is a Tracker Muon and 0 in case it isn't.
+The dataset used in this exercise has been collected by the CMS experiment, in proton-proton collisions at the LHC. It contains 986100 entries (muon pair candidates) with an associated invariant mass. For each candidate, the transverse momentum (pT), rapidity(\eta) and asymuthal angle (\phi) are stored, along with a binary flag, **PassingProbeTrackingMuon** (that is 1 in case the corresponding probe satisfied theTracker Muon selection criteria and 0 in case it doesn't).
 
 | UPSILON_DATA |
  ------------- |
@@ -74,18 +71,17 @@ The dataset used in this exercise consists of 986100 entries (muons) with an ass
 
 Open `Efficiency.C`.
 
-We'll start by calculating the efficiency associated with pT.
-It is useful to have an idea of the distribution of the quantity we want to study. In order to do this, we'll repeat the steps followed to plot the invariant mass but for the **ProbeMuon_Pt**.
+We'll start by calculating the efficiency as a function of pT.
+It is useful to have an idea of the distribution of the quantity we want to study. In order to do this, we’ll repeat the steps perviously used to plot the invariant mass, but now for the **ProbeMuon_Pt** variable.
 
 ~~~
-root T\&P_UPSILON_DATA.root
 UPSILON_DATA->Draw("ProbeMuon_Pt")
 ~~~
 {: .language-bash}
 
 <img width="500px" src="../fig/total.png">
 
-Hmm.. seems like our domain is larger than we need it to be. To fix this, we can apply a contraint to our plot. Try:
+Hmm.. seems like our domain is larger than we need it to be. To fix this, we can apply a constraint to our plot. Try:
 
 ~~~
 UPSILON_DATA->Draw("ProbeMuon_Pt", "ProbeMuon_Pt < 20")
@@ -94,7 +90,7 @@ UPSILON_DATA->Draw("ProbeMuon_Pt", "ProbeMuon_Pt < 20")
 
 <img width="500px" src="../fig/zoom.png">
 
-Now that we have a clear view of the transverse momentum, we can now choose the appropriate bins for our fit. Remember that we need a fair amount of data in order to have a good fit, so be careful not to include too few events on a given bin. I've left a suggestion for an appropriate bin setup on `Bin_Suggestion.txt`
+Now that we have a clear view of the transverse momentum, we can choose the appropriate bins for our fit. Remember that we need a fair amount of data in order to have a good fit, so be careful not to include too few events on a given bin. We've left a suggestion for an appropriate bin setup on `Bin_Suggestion.txt`
 
 > ## Open `Bin_Suggestion.txt`
 >
@@ -125,9 +121,10 @@ string* conditions = get_conditions(bin_n, bins);
 
 ## The Fit
 
-The fits in this tutorial will be calculated using the `/src/DoFit.cpp` function based on the [RooFit](https://root.cern.ch/doc/master/group__Roofit.html) library.
+The fits in this tutorial will be executed using the `/src/DoFit.cpp` function based on the [RooFit](https://root.cern.ch/doc/master/group__Roofit.html) library.
 
-You can find a very good tutorial on how to use **RooFit** on [this link](https://indico.scc.kit.edu/event/31/contributions/1864/attachments/1105/1550/lukas_hehn_kseta-workshop_introduction-to-RooFit.pdf).
+You can find generic tutorials [_here_](https://root.cern.ch/doc/master/group__tutorial__roofit.html).
+and if you’re starting with **RooFit** you may find [_this one_ ](https://indico.scc.kit.edu/event/31/contributions/1864/attachments/1105/1550/lukas_hehn_kseta-workshop_introduction-to-RooFit.pdf) particularly useful.
 
 > ## Open `DoFit.cpp`
 >
@@ -303,9 +300,9 @@ You can find a very good tutorial on how to use **RooFit** on [this link](https:
 > 
 {: .solution}
 
-the `DoFit.cpp` function executes a simultaneous fit, leaving only as a variable between all the probes and the passing probes, the yield of the signal and the yield of the background. 
+the DoFit.cpp function executes a simultaneous fit to two two event categories (Passingand All).
 
-After understanding the basics of how fitting with *RooFit* works, fill in the `init_conditions` with initial approximations that you find reasonable for each parameter.
+After understanding the basics of how fitting with *RooFit* works, fill in the `init_conditions` with initial approximations (starting values for the fit parametersi) that you find reasonable for each parameter.
 I recommend plotting the invariant mass of our dataset again and choosing the values as close as possible to the 'real' ones.
 
 > ## Suggestion for Initial Values
@@ -332,9 +329,10 @@ for (int i = 0; i < bin_n; i++)
 }
 ~~~
 {:  .language-cpp}
+The ```McYield``` function has the same output as ```DoFit``` and has to do with Monte Carlo dataset, which only contains signal for the 1S peak.
 
 To get the efficiency plot, we'll use the [TEfficiency](https://root.cern.ch/doc/master/classTEfficiency.html)  class.
-You'll see that in order to create a ``TEfficiency`` object, on of the [constructors requires](https://root.cern.ch/doc/master/classTEfficiency.html#aa0e99b4161745fd3bee0ae5c0f58880e) requires two ``TH1``objects. One with All the probes and one with the passing probes.
+You'll see that in order to create a ``TEfficiency`` object, one of the [constructors required](https://root.cern.ch/doc/master/classTEfficiency.html#aa0e99b4161745fd3bee0ae5c0f58880e) requires two ``TH1``objects. One with _All_ the probes and one with the _Passing_ probes.
 
 > ## Important note
 >You musn't forget to add the fitting errors to the yield histograms. Using ``/src/make_hist.cpp``  will guarantee that the errors are included.
@@ -413,17 +411,17 @@ To plot the efficiency we'll the use the ``/src/get_efficiency.cpp`` function.
 
 to run your code, type:
 ~~~
-root Efficiency.C
+root Efficiency.C -q
 ~~~
 {: .language-bash}
 
-when the macro stops doing it's thing, you should have 2 new files on your working directory:  ``Efficiency_Run2011.root`` and ``Histograms.root``.
-The first contains the efficiency we calculated! the second file is used to redo any unusable fits.
+when the macro stops doing its thing, you should have 2 new files. One on your working directory: ```Histograms.root```, and another one ```Efficiency_Run2011.root``` located at ```/Efficiency Result/Pt```.
+The second contains the efficiency we calculated! the first file is used to redo any unusable fits.
 To open ``Efficiency_Run2011.root``, on your working directory type:
 
 ~~~
 root
-[0] new TBrowser
+new TBrowser
 ~~~
 {: .language-bash}
 
@@ -451,6 +449,7 @@ If so, uncomment:
 
 and run the macro again.
 You should get something like the following result. If so, repeat this process for the two quantites left to go, Eta and Phi!
+In case you want to change on of the fits, use the ```change_bin.cpp```function.
 
 <img width="500px" src="../fig/Efficiency_thomas.png">
 
