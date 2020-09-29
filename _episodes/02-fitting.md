@@ -329,6 +329,7 @@ for (int i = 0; i < bin_n; i++)
 }
 ~~~
 {:  .language-cpp}
+The ```McYield``` function has the same output as ```DoFit``` and has to do with Monte Carlo dataset, which only contains signal for the 1S peak.
 
 To get the efficiency plot, we'll use the [TEfficiency](https://root.cern.ch/doc/master/classTEfficiency.html)  class.
 You'll see that in order to create a ``TEfficiency`` object, on of the [constructors requires](https://root.cern.ch/doc/master/classTEfficiency.html#aa0e99b4161745fd3bee0ae5c0f58880e) requires two ``TH1``objects. One with _All_ the probes and one with the _Passing_ probes.
