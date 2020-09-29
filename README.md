@@ -4,7 +4,7 @@
 
 This repository generates the corresponding lesson website from [The Carpentries](https://carpentries.org/) repertoire of lessons.
 
-You can find this lesson online using [this](https://tinyurl.com/ydngxxb) link.
+You can find this lesson online using [this]() link.
 
 ## Contributing
 
