@@ -1,7 +1,7 @@
 ---
 title: "The Fitting Method"
-teaching: 5
-exercises: 40
+teaching: 4
+exercises: 25
 questions:
 - "What is this fitting method?"
 - "how do we use it to calculate the efficiency?"
