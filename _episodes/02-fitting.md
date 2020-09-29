@@ -449,6 +449,7 @@ If so, uncomment:
 
 and run the macro again.
 You should get something like the following result. If so, repeat this process for the two quantites left to go, Eta and Phi!
+In case you want to change on of the fits, use the ```change_bin.cpp```function.
 
 <img width="500px" src="../fig/Efficiency_thomas.png">
 
