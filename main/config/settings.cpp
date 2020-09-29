@@ -15,7 +15,7 @@ const char* directoriesToSave[] = {"../results/result/",
 //MAIN OPTIONS
 
 //Which file of files (variable above) should use
-int useFile = 3;
+int useFile = 4;
 
 //Choose method
 //if 1 -> sideband by histogram || if 2 -> sideband by fitting
@@ -29,7 +29,7 @@ const char* directoryToSave = directoriesToSave[useFile];
 //directoryToSave = "../result/";
 
 //Should limit data?
-long long limitData = 100000; //0 -> do not limit
+long long limitData = 0; //0 -> do not limit
 
 //Canvas drawing
 bool shouldDrawInvariantMassCanvas 			= true;
