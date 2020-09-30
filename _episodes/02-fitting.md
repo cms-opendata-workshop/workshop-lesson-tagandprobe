@@ -63,7 +63,7 @@ In file included from input_line_11:1:
 /Users/thomasgaehtgens/Desktop/CMS-tutorial/Efficiency.C:36:35: error: expected expression
     init_conditions[3] = /*sigma*/;
 ~~~
-    {: .error}
+{: .error}
     
 ## The Fitting Method
 
@@ -244,8 +244,10 @@ You won't need to do anything in ``DoFit.cpp`` but you can check it out if you'r
 >~~~
 >{: .language-cpp}
 >
->We then create the variables used as parameters in the fit. **a0** and **a1** used in the Chebychev polynomial ([**RooChebychev**](https://root.cern.ch/doc/master/classRooChebychev.html)
->and the variables **sigma**, **mean1**,  **mean2**,  **mean3** used on the [**RooCBShape**](https://root.cern.ch/doc/master/classRooCBShape.html) and [**RooGaussian**](https://root.cern.ch/doc/master/classRooGaussian.html)
+>We then create the variables used as parameters in the fit. **a0** and **a1** used in the Chebychev polynomial ([**RooChebychev**](https://root.cern.ch/doc/master/classRooChebychev.html), for the background
+>and **sigma**, **mean1**,  **mean2**,  **mean3** used on the [**RooCBShape**](https://root.cern.ch/doc/master/classRooCBShape.html) and [**RooGaussian**](https://root.cern.ch/doc/master/classRooGaussian.html) for the signal. **frac1** and **frac2** are used as normalization values.
+
+For the yields of the fits, 
 >
 >~~~
 >     // BACKGROUND VARIABLES
@@ -261,7 +263,10 @@ You won't need to do anything in ``DoFit.cpp`` but you can check it out if you'r
 >     RooRealVar mean2("mean2","mean2",init_conditions[1]); =(    RooRealVar mean3("mean3","mean3",init_conditions[2]);>.0    // CRYSTAL BALL VARIABLES
 >     RooRealVar alpha("alpha","alpha", 1.4384e+00); =(    RooRealVar n("n", "n", 1.6474e+01);>.0    // FIT FUNCTIONS
 >     RooCBShape  gaussian1("signal1","signal1",InvariantMass,mean1,sigma, alpha, n); =(    RooGaussian gaussian2("signal2","signal2",InvariantMass,mean2,sigma);>.0    RooGaussian gaussian3("signal3","signal3",InvariantMass,mean3,sigma);
->     
+>
+>     RooRealVar frac1("frac1","frac1",7.1345e-01);
+>     RooRealVar frac2("frac2","frac2",1.9309e-01);    
+>
 >     double n_signal_initial1 =(Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.015",init_conditions[1]))-Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.030&&abs(InvariantMass-%g)>.015",init_conditions[1],init_conditions[1]))) / Data_ALL->sumEntries();
 >     double n_signal_initial2 =(Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.015",init_conditions[2]))-Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.030&&abs(InvariantMass-%g)>.015",init_conditions[2],init_conditions[2]))) / Data_ALL->sumEntries();
 >     double n_signal_initial3 =(Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.015",init_conditions[3]))-Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.030&&abs(InvariantMass-%g)>.015",init_conditions[3],init_conditions[3]))) / Data_ALL->sumEntries();
@@ -276,8 +281,6 @@ You won't need to do anything in ``DoFit.cpp`` but you can check it out if you'r
 >     RooRealVar n_back("n_back","n_back",n_back_initial,0.,Data_ALL->sumEntries());
 >     RooRealVar n_back_pass("n_back_pass","n_back_pass",n_back_initial,0.,Data_PASSING->sumEntries());
 >
->     RooRealVar frac1("frac1","frac1",7.1345e-01);
->     RooRealVar frac2("frac2","frac2",1.9309e-01);
 >~~~
 >{: .language-cpp}
 >
