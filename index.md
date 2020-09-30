@@ -17,7 +17,7 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 
 > ## Prerequisites
 > In order to complete this lesson you need
-> - [ROOT CERN](https://root.cern/) 6.14 or later installed. Install lesson available [here](https://cms-opendata-workshop.github.io/workshop-lesson-root/02-get-root/index.html)
+> - [ROOT CERN](https://root.cern/) 6.16 or later installed. Install lesson available [here](https://cms-opendata-workshop.github.io/workshop-lesson-root/02-get-root/index.html)
 > - Internet connection.
 > - A basic understanding of terminal commands.
 {: .prereq}

@@ -83,7 +83,7 @@ root [1]
 ~~~
 {: .output}
 
-Lets check its content
+Lets check its content. Type on terminal:
 
 ~~~
 new TBrowser
@@ -94,7 +94,7 @@ You should see something like this:
 
 ![Invariant Mass histogram](../fig/prints/tbrowser0.png)
 
-This is a visual navigator of a `.root` file. Here you can see the struture of `generated_hist.root`. Double click the folders to open them and see their content. The Efficiency plots we see are stored in `efficiency/plots/`:
+This is a visual navigator of a `.root` file. Here you can see the struture of `generated_hist.root`. Double click the folders to open them and see their content. The Efficiency plots we see are stored in `efficiency/plots/` folder:
 
 ![Invariant Mass histogram](../fig/prints/tbrowser2.png)
 
@@ -244,31 +244,38 @@ Everything is uptodate to compare sideband subtraction's results between real da
 Now you need to run the code. To do this, save the file and type on your terminal:
 
 ~~~
-root -l
+root -l compare_efficiency.cpp
 ~~~
 {: .language-bash}
 
-~~~
-root[0]
-~~~
-{: .output}
-
-Now run **compare_efficiency.cpp**:
+If everything went well, the message you'll see in terminal at end of the process is:
 
 ~~~
-.x compare_efficiency.cpp
-~~~
-{: .language-bash}
-
-If everything went right, the message you'll see in terminal at end of the process is:
-
-~~~
-
 Use Scheme: 0
 Done. All result files can be found at "../results/Comparison_Upsilon_Sideband_Run_vs_MC/"
-root[1]
 ~~~
 {: .output}
+
+> ## Note
+>
+> The command above to run the code will display three new windows on your screen with comparison plots. You can avoid them by running straight the **command below**. 
+>
+> ~~~
+> root -l -b -q compare_efficiency.cpp
+> ~~~
+> {: .language-bash}
+>
+> In this case, to check it results you are going to need go for result folder (printed on code run) and check images there by yourself.
+> You can try to run TBrowser again:
+>
+> ~~~
+> cd [FOLDER_PATH]
+> root -l
+> new TBrowser
+> ~~~
+> {: .language-bash}
+>
+{: .callout}
 
 And as output plots comparsion, you get:
 
@@ -310,7 +317,7 @@ root [1]
 ~~~
 {: .output}
 
-Now lets look at its content.
+Now lets look at its content. Type on terminal:
 
 ~~~
 new TBrowser
@@ -434,6 +441,13 @@ Should get you these results:
 ![Invariant Mass histogram](../fig/Comparison_Upsilon_Fitting_Run_vs_MC/Muon_Eta_Tracker_Probe_Efficiency.png)
 ![Invariant Mass histogram](../fig/Comparison_Upsilon_Fitting_Run_vs_MC/Muon_Phi_Tracker_Probe_Efficiency.png)
 
+Now you can type the command below to **quit root** and close all created windows:
+
+~~~
+.q
+~~~
+{: .language-bash}
+
 ## Comparison results between data from the sideband and data from the fitting method
 
 > ## Challenge
@@ -470,6 +484,6 @@ Should get you these results:
 >
 > This is work in progress adapted from CMS official code to create CMS Open Data Tag and Probe ntuples.
 >
-{: .challenge}
+{: .solution}
 
 {% include links.md %}

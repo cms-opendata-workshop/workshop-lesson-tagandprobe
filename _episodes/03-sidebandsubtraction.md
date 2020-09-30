@@ -1,7 +1,7 @@
 ---
 title: "Sideband subtraction method"
-teaching: 4
-exercises: 25
+teaching: 5
+exercises: 35
 questions:
 - "What is the sideband subtraction method?"
 - "How to implement it?"
@@ -16,7 +16,7 @@ keypoints:
 
 ### Signal extraction: sideband subtraction method
 
-The efficiency is calculated using **only signal muons**. So we need a way to extract signal from the dataset. You've used the fitting method and now you'll meet the sideband subtraction method.
+The reconstruction efficiency is calculated using **only signal muons**. This efficiency represents how well the tag and probe method reconstructed the resonance. So, in order to measure the efficiency, we need a way to extract signal from the dataset. You've used the fitting method and now you'll meet the sideband subtraction method.
 
 This method consists in choosing sideband and signal regions in invariant mass distribution. The sideband regions (shaded in red in the figure) have background particles and the signal region (shared in green in the figure) has background and signal particles.
 
@@ -58,10 +58,10 @@ You will see this histogram on this exercise.
 
 ## Preparing files
 
-First, we need to get the code. On your terminal type:
+First, we need to get the code. Go to folder you have created for this lesson and on your terminal type:
 
 ~~~
-git clone -b sideband https://github.com/allanjales/efficiency_tagandprobe
+git clone -b sideband git://github.com/allanjales/efficiency_tagandprobe
 cd efficiency_tagandprobe
 ~~~
 {: .language-bash}
@@ -73,7 +73,7 @@ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download
 ~~~
 {: .language-bash}
 
-This code downloads directly from Google Drive.
+This code downloads the file directly from Google Drive.
 
 Run this code to download the simulation ntuple for ϒ (requires 66 MB):
 
@@ -122,12 +122,22 @@ gedit settings.cpp
 ~~~
 {: .language-bash}
 
-If that didn't work, try nano:
+Or, if you can not use gedit, try nano:
 
 ~~~
 nano settings.cpp
 ~~~
 {: .language-bash}
+
+> ## "I do not have nano!"
+>
+> You can try to use **any text editor**, but here is some commands you cant try to use to install it:
+>
+> * Ubuntu/Debian: `sudo apt-get -y install nano`.
+> * RedHat/CentOS/Fedora: `sudo yum install nano`.
+> * Mac OS X: `nano is installed by default`.
+>
+{: .callout}
 
 We want to calculate **efficiencies of tracker muons**. With the **settings.cpp** file opened, make sure to let the variables like this:
 
@@ -361,22 +371,10 @@ classes  compare_efficiency.cpp  config  macro.cpp
 ~~~
 {: .output}
 
-Initialize ROOT:
-
-~~~
-root -l
-~~~
-{: .language-bash}
-
-~~~
-root[0]
-~~~
-{: .output}
-
 Run the macro.cpp:
 
 ~~~
-.x macro.cpp
+root -l -b -q macro.cpp
 ~~~
 {: .language-bash}
 
@@ -389,19 +387,11 @@ Data analysed = 986100 of 986100
 ~~~
 {: .output}
 
-In this process, more informations will be printed in terminal while plots will pop up on your screen (these plots are been saved in a folder). If you wish to avoid this, and perhaps run a little faster, run the code instead as:
-
-~~~
-root -l -b -q macro.cpp
-~~~
-{: .language-bash}
-
-The message below tells you that code has finished running:
+In this process, more informations will be printed in terminal while plots will be created on specified (these plots are been saved in a folder). The message below tells you that code has finished running:
 
 ~~~
 Done. All result files can be found at "../results/Upsilon_Run_2011/"
 
-root[1]
 ~~~
 {: .output}
 
@@ -419,13 +409,6 @@ root[1]
 > This issue may be avoided by fine-tuning the binning choice. For now, these messages may be ignored.
 > 
 {: .callout}
-
-Type the command below to **quit root** and close all the created windows:
-
-~~~
-.q
-~~~
-{: .language-bash}
 
 ## Probe Efficiency results for Run 2011
 
@@ -457,7 +440,7 @@ If all went well, your results are going to be like these:
 
 > ## Comparison between real data and simulation
 >
-> We'll do this in the last episode of this exercise. So the challenge above is mandatory. 
+> We'll do this in the last section of this exercise. So the challenge above is mandatory. 
 > 
 {: .callout}
 
