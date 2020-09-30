@@ -23,14 +23,58 @@ git clone git://github.com/AthomsG/CMS-tutorial
 ~~~
 {: .language-bash}
 
+### A brief explanation of this repository
+The repository you'll use only requires you to make changes on the ``Efficiency.C`` macro. These changes are highligthed as such:
+
+~~~
+/*-----------------------------------I N S E R T    C O D E    H E R E-----------------------------------*/
+~~~
+{:  .language-cpp}
+
+So when you see this comment, know that it's your turn to code!
+If you don't, the macro won't run and the follwoing errors are to be expected:
+
+~~~
+In file included from input_line_11:1:
+/Users/thomasgaehtgens/Desktop/CMS-tutorial/Efficiency.C:13:23: error: expected expression
+    bool DataIsMC   = ... ;
+                      ^
+/Users/thomasgaehtgens/Desktop/CMS-tutorial/Efficiency.C:15:23: error: expected expression
+    string MuonId   = ... ;
+                      ^
+/Users/thomasgaehtgens/Desktop/CMS-tutorial/Efficiency.C:17:23: error: expected expression
+    string quantity = ... ; //Pt, Eta or Phi
+                      ^
+/Users/thomasgaehtgens/Desktop/CMS-tutorial/Efficiency.C:25:22: error: expected expression
+    double bins[] = {...};
+                     ^
+/Users/thomasgaehtgens/Desktop/CMS-tutorial/Efficiency.C:26:21: error: expected expression
+    int bin_n     = ...;
+                    ^
+/Users/thomasgaehtgens/Desktop/CMS-tutorial/Efficiency.C:33:35: error: expected expression
+    init_conditions[0] = /*peak1*/;
+                                  ^
+/Users/thomasgaehtgens/Desktop/CMS-tutorial/Efficiency.C:34:35: error: expected expression
+    init_conditions[1] = /*peak2*/;
+                                  ^
+/Users/thomasgaehtgens/Desktop/CMS-tutorial/Efficiency.C:35:35: error: expected expression
+    init_conditions[2] = /*peak3*/;
+                                  ^
+/Users/thomasgaehtgens/Desktop/CMS-tutorial/Efficiency.C:36:35: error: expected expression
+    init_conditions[3] = /*sigma*/;
+~~~
+    {: .error}
+    
 ## The Fitting Method
 
-First, a brief explanation of the method we’ll be studying. It consists in fitting the invariantmass of the tag+probe pairs, in the two categories: passing probes, and all probes. 
-The fit allows to statistically discriminate between signal and background. To compute the efficiency we simply divide the signal yield from the fits to the Passing category by the signal yield from the fit the inclusive (All) category. The following image illustrates the procedure.
-The procedure is applied after splitting the dataset in bins of a kinematic variable of theprobe (e.g. the traverse momentum); as such, the efficiency will be measured as a function of that quantity.
+First, a brief explanation of the method we’ll be studying. 
+It consists in fitting the invariant mass of the tag & probe pairs, in the two categories: passing probes, and all probes. 
+The fit allows to statistically discriminate between signal and background. To compute the efficiency we simply divide the signal yield from the fits to the Passing category by the signal yield from the fit the inclusive (All) category. This procedure is applied after splitting the dataset in bins of a kinematic variable of the probe (e.g. the traverse momentum); as such, the efficiency will be measured as a function of that quantity for each of the bins.
+As mentioned in the [introduction episode](https://cms-opendata-workshop.github.io/workshop-lesson-tagandprobe/01-introduction/index.html) calculating efficiencies is of great importance since _"The determination of the detector efficiency is a critical ingredient in any physics measurement. It accounts for the particles that were produced in the collision but escaped detection (did not reach the detector elements, were missed by the reconstructions algorithms, etc)."_
+
+The following image illustrates the fitting method procedure.
 
 <img width="700px" src="../fig/esquema.png">
-
 
 Let's start exploring our dataset. From the cloned directory, type:
 
