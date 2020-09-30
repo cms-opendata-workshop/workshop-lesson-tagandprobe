@@ -19,7 +19,7 @@ keypoints:
 To prepare for this tutorial, clone the respective github repository
 
 ~~~
-git clone https://github.com/AthomsG/CMS-tutorial
+git clone git://github.com/AthomsG/CMS-tutorial
 ~~~
 {: .language-bash}
 
