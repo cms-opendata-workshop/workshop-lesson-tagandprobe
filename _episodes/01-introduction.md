@@ -18,11 +18,9 @@ keypoints:
 
 The **tag and probe** method is a **data-driven technique** for measuring particle detection efficiencies. The determination of the detector efficiency is a critical ingredient in any physics measurement. It accounts for the particles that were produced in the collision but escaped detection (did not reach the detector elements, were missed by the reconstructions algorithms, etc). It can be in general estimated using simulations, but simulations need to be calibrated with data. The T&P method here described provides a useful and elegant mechanism for extracting efficiencies directly from data.
 
-(The efficiencies are extracted from the data directly; it involves no use of simulation, and it’s results are used to calibrate simulations.)
-
 ## What is "tag" and "probe"?
 
-The resonance decays to a pair of particles: the tag and the probe. 
+The resonance  decays to a pair of particles: the tag and the probe. 
 
 * Tag muon = well identified, triggered muon (tight selection criteria).
 * Probe muon = unbiased set of muon candidates (very loose selection criteria), either passing or failing the criteria for which the efficiency is to be measured.
