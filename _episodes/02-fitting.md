@@ -133,14 +133,14 @@ UPSILON_DATA->Draw("ProbeMuon_Pt", "ProbeMuon_Pt < 20")
 <img width="500px" src="../fig/zoom.png">
 
 Now that you're acquainted with the data, open the  `Efficiency.C` file. 
-You'll have to make some small adjustments to the code in this section:
+You'll have to make some small adjustments to the code in this section ( from line:19 to line:32 ):
 
 ~~~
 /*-----------------------------------I N S E R T    C O D E    H E R E-----------------------------------*/
-double bins[] = {...};
-int bin_n     = ...;
+double bins[] =  ...;
+int bin_n     =  ...;
+ /*------------------------------------------------------------------------------------------------------*/
 
-string* conditions = get_conditions(bin_n, bins, "ProbeMuon_" + quantity); // (1)
 
 //Now we must choose initial conditions in order to fit our data
 double *init_conditions = new double[4];
@@ -149,41 +149,41 @@ init_conditions[0] = /*peak1*/;
 init_conditions[1] = /*peak2*/;
 init_conditions[2] = /*peak3*/;
 init_conditions[3] = /*sigma*/;
+/*------------------------------------------------------------------------------------------------------*/
 ~~~
 {: .language-cpp}
 
-We'll start by 
+We'll start by choosing the desired bins for the transverse momentum. If you're feeling brave, choose appropriate bins for our fit remembering that we need a fair amount of data in each bin (more events mean a better fit!). If not, we've left  a suggestion that you can paste onto the ```Efficiency.C``` file.
 
-
-
-Now that we have a clear view of the transverse momentum, we can choose the appropriate bins for our fit. Remember that we need a fair amount of data in order to have a good fit, so be careful not to include too few events on a given bin. We've left a suggestion for an appropriate bin setup on `Bin_Suggestion.txt`
-
-> ## Open `Bin_Suggestion.txt`
->
-> When opening the file, you'll find
->
+> ## Bin Suggestion
 > ~~~
 > // TRACKER MUON BINS -------------------------------------------------------------------
 >//double bins[] = {2, 3.4, 4, 4.2, 4.4, 4.7, 5.0, 5.1, 5.2, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.2, 6.4, 6.6, 6.8, 7.3, 9.5, 13.0, 17.0, 40};
 >//int bin_n = 23;       //-- BINS USED TO CALCULATE PT
->
->//double bins[] = {-3, -2.8, -2.6, -2.4, -2.2, -2.0, -1.8, -1.6, -1.4, -1.2, -1.0, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.5, 0.6, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0};
->//int bin_n = 30;       //-- BINS USED TO CALCULATE PHI
->
->//double bins[] = {-2.0, -1.9, -1.8, -1.7, -1.6, -1.5, -1.4, -1.2, -1.0, -0.8, -0.6, -0.4, 0, 0.2, 0.4, 0.6, 0.7, 0.95, 1.2, 1.4, 1.5, 1.6, 2.0};
->//int bin_n = 23;      // -- BINS USED TO CALCULATE ETA
 > ~~~
 > {: .language-cpp}
 >
-> Since we're starting with the transverse momentum, copy and paste the respective lines onto your  `Efficiency.C` file 
 {: .solution}
 
-Now that the bins are set, we'll define a string array that will store the binning conditions so that we can apply them to the fits
+Now that the bins are set, we'll need to define the initial parameters for our fit.
+You can try to get a good 1st approximation from the plot of the invariant mass that we got before:
 
-~~~
-string* conditions = get_conditions(bin_n, bins);
-~~~
-{: language-bash}
+<img width="500px" src="../fig/init_conditions.png">
+
+or use the suggested values
+
+> ## Suggestion for the Initial Values
+>Try the following initial values:
+> 
+><ul>
+><li>init_conditions[0] = 9.46030;</li>
+><li>init_conditions[1] = 10.02326;</li>
+><li>init_conditions[2] = 10.3552;</li>
+><li>init_conditions[3] = 0.08;</li>
+></ul>
+>
+> 
+{: .solution}
 
 ## The Fit
 
@@ -371,18 +371,7 @@ the DoFit.cpp function executes a simultaneous fit to two two event categories (
 After understanding the basics of how fitting with *RooFit* works, fill in the `init_conditions` with initial approximations (starting values for the fit parametersi) that you find reasonable for each parameter.
 I recommend plotting the invariant mass of our dataset again and choosing the values as close as possible to the 'real' ones.
 
-> ## Suggestion for Initial Values
->Try the following initial values:
-> 
-><ul>
-><li>init_conditions[0] = 9.46030;</li>
-><li>init_conditions[1] = 10.02326;</li>
-><li>init_conditions[2] = 10.3552;</li>
-><li>init_conditions[3] = 0.08;</li>
-></ul>
->
-> 
-{: .solution}
+
 Now we only need to create a loop to fit each bin and save the yields and associated errors in order to get the efficiency. This is achieved by:
 
 ~~~
