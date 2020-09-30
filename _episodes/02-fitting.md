@@ -185,6 +185,8 @@ or use the suggested values
 > 
 {: .solution}
 
+We are now ready to execute the fits!
+
 ## The Fit
 
 The fits in this tutorial will be executed using the `/src/DoFit.cpp` function based on the [RooFit](https://root.cern.ch/doc/master/group__Roofit.html) library.
@@ -192,170 +194,181 @@ The fits in this tutorial will be executed using the `/src/DoFit.cpp` function b
 You can find generic tutorials [_here_](https://root.cern.ch/doc/master/group__tutorial__roofit.html).
 and if you’re starting with **RooFit** you may find [_this one_ ](https://indico.scc.kit.edu/event/31/contributions/1864/attachments/1105/1550/lukas_hehn_kseta-workshop_introduction-to-RooFit.pdf) particularly useful.
 
-> ## Open `DoFit.cpp`
->
+You won't need to do anything in ``DoFit.cpp`` but you can check it out if you're curious. 
+
+> ## Check out `DoFit.cpp`
+>We've divided the code into smaller "digestible" chunks, so it's easier to understand.
 > ~~~
-> double* doFit(string condition, string MuonID_str, double* init_conditions, bool save = TRUE) // RETURNS ARRAY WITH [yield_all, yield_pass, err_all, err_pass]    ->   OUTPUT ARRAY
+> double* doFit(string condition, string MuonID_str, string quant, double* init_conditions, bool save = true)
 >{
->    TFile *file0    = TFile::Open("DATA/Upsilon/trackerMuon/T&P_UPSILON_DATA.root");
->    TTree *DataTree = (TTree*)file0->Get(("UPSILON_DATA"));
->    
->    double _mmin = 9.1;  double _mmax = 10.6;
->    
->    RooRealVar MuonID(MuonID_str.c_str(), MuonID_str.c_str(), 0, 1); //Muon_Id
->    
->    RooRealVar InvariantMass("InvariantMass", "InvariantMass", _mmin, _mmax);
->    RooRealVar ProbeMuon_Pt("ProbeMuon_Pt", "ProbeMuon_Pt", 0, 60);
->    RooRealVar ProbeMuon_Eta("ProbeMuon_Eta", "ProbeMuon_Eta", -3, 3);
->    RooRealVar ProbeMuon_Phi("ProbeMuon_Phi", "ProbeMuon_Phi", -2, 2);
->    
->    RooFormulaVar* redeuce = new RooFormulaVar("PPTM", condition.c_str(), RooArgList(ProbeMuon_Phi));
->    RooDataSet *Data_ALL    = new RooDataSet("DATA", "DATA", DataTree, RooArgSet(InvariantMass, MuonID, ProbeMuon_Phi),*redeuce);
->    RooFormulaVar* cutvar = new RooFormulaVar("PPTM", strcat(condition.c_str(), "&& PassingProbeTrackerMuon == 1"), RooArgList(MuonID, ProbeMuon_Phi));
->    
->    // CUTAVAR NEEDS TO BE CHANGED
->    RooDataSet *Data_PASSING = new RooDataSet("DATA_PASS", "DATA_PASS", DataTree, RooArgSet(InvariantMass, MuonID, ProbeMuon_Phi), *cutvar);//
->    
->    RooDataHist* dh_ALL     = Data_ALL->binnedClone();
->    RooDataHist* dh_PASSING = Data_PASSING->binnedClone();
->    
->    TCanvas* c_all  = new TCanvas;
->    TCanvas* c_pass = new TCanvas;
->    
->    RooPlot *frame = InvariantMass.frame(RooFit::Title("Invariant Mass"));
->    // BACKGROUND VARIABLES
->    RooRealVar a0("a0", "a0", 2.5875e-02, -1., 1.);
->    RooRealVar a1("a1", "a1", -7.8407e-02, -1., 1.);
+>     TFile *file0    = TFile::Open("DATA/Upsilon/trackerMuon/T&P_UPSILON_DATA.root");
+>     TTree *DataTree = (TTree*)file0->Get(("UPSILON_DATA"));
 >
->    // BACKGROUND FUNCTION
->    RooChebychev background("background","background", InvariantMass, RooArgList(a0,a1));
->    
->    // G A U S S I A N    V A R I A B L E S
->    // ---------------------------------------------------------------------------
->    RooRealVal sigma("sigma", "sigma",init_conditions[3]);
->    RooRealVar mean1("mean1","mean1",init_conditions[0]);
->    RooRealVar mean2("mean2","mean2",init_conditions[1]);
->    RooRealVar mean3("mean3","mean3",init_conditions[2]);
->    // C R Y S T A L L    B A L L    V A R I A B L E S
->    RooRealVar alpha("alpha","alpha", 1.4384e+00, 1.43, 1.44);
->    RooRealVar n("n", "n", 1.6474e+01, 16., 17.);
->    // F I T    F U N C T I O N S
->    RooCBShape  peak1("signal1","signal1",InvariantMass,mean1,sigma, alpha, n);
->    RooGaussian peak2("signal2","signal2",InvariantMass,mean2,sigma);
->    RooGaussian peak3("signal3","signal3",InvariantMass,mean3,sigma);
->    // ---------------------------------------------------------------------------
->    
->    double n_signal_initial1 =(Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.015",mass_peak1))-Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.030&&abs(InvariantMass-%g)>.015",mass_peak1,mass_peak1))) / Data_ALL->sumEntries();
->    double n_signal_initial2 =(Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.015",mass_peak2))-Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.030&&abs(InvariantMass-%g)>.015",mass_peak2,mass_peak2))) / Data_ALL->sumEntries();
->    double n_signal_initial3 =(Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.015",mass_peak3))-Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.030&&abs(InvariantMass-%g)>.015",mass_peak3,mass_peak3))) / Data_ALL->sumEntries();
->    
->    double n_signal_initial_total = n_signal_initial1 + n_signal_initial2 + n_signal_initial3;
->    
->    RooRealVar frac1("frac1","frac1",7.1345e-01,0.6,0.72);
->    RooRealVar frac2("frac2","frac2",1.9309e-01,0.191,0.194);
+>     TCanvas* c_all  = new TCanvas;
+>     TCanvas* c_pass = new TCanvas;
+>     
+>     RooRealVar MuonID(MuonID_str.c_str(), MuonID_str.c_str(), 0, 1); //Muon_Id
+>     
+>     RooRealVar InvariantMass("InvariantMass", "InvariantMass", 9, 10.8);
+>     
+>     double* limits = new double[2];
+>     if (quant == "Pt") {
+>         limits[0] = 0;
+>         limits[1] = 40;
+>     }
+>     if (quant == "Eta") {
+>         limits[0] = -3;
+>         limits[1] = 3;
+>     }
+>     if (quant == "Phi") {
+>         limits[0] = -2;
+>         limits[1] = 2;
+>     }
+>     RooRealVar quantity(("ProbeMuon_" + quant).c_str(), ("ProbeMuon_" + quant).c_str(), limits[0], limits[1]);
+>     
+>     RooFormulaVar* redeuce = new RooFormulaVar("PPTM", condition.c_str(), RooArgList(quantity));
+>     RooDataSet *Data_ALL    = new RooDataSet("DATA", "DATA", DataTree, RooArgSet(InvariantMass, MuonID, quantity),*redeuce);
+>     RooFormulaVar* cutvar = new RooFormulaVar("PPTM", (condition + " && " + MuonID_str + " == 1").c_str() , RooArgList(MuonID, quantity));
+> 
+>     RooDataSet *Data_PASSING = new RooDataSet("DATA_PASS", "DATA_PASS", DataTree, RooArgSet(InvariantMass, MuonID, quantity), *cutvar);//
 >
->    RooAddPdf* signal;
->    
->    signal      = new RooAddPdf("signal", "signal", RooArgList(peak1, peak2,peak3), RooArgList(frac1, frac2));
->    double n_back_initial = 1. - n_signal_initial1 - n_signal_initial2 -n_signal_initial3;
->    
->    RooRealVar n_signal_total("n_signal_total","n_signal_total",n_signal_initial_total,0.,Data_ALL->sumEntries());
->    RooRealVar n_signal_total_pass("n_signal_total_pass","n_signal_total_pass",n_signal_initial_total,0.,Data_PASSING->sumEntries());
->    
->    RooRealVar n_back("n_back","n_back",n_back_initial,0.,Data_ALL->sumEntries());
->    RooRealVar n_back_pass("n_back_pass","n_back_pass",n_back_initial,0.,Data_PASSING->sumEntries());
->    RooAddPdf* model;
->    RooAddPdf* model_pass;
->    
->    model      = new RooAddPdf("model","model", RooArgList(*signal, background),RooArgList(n_signal_total, n_back));
->    model_pass = new RooAddPdf("model_pass", "model_pass", RooArgList(*signal, background),RooArgList(n_signal_total_pass, n_back_pass));
->    
->    // S I M U L T A N E O U S    F I T
->    // ---------------------------------------------------------------------------
->    RooCategory sample("sample","sample") ;
->    sample.defineType("All") ;
->    sample.defineType("PASSING") ;
->    
->    RooDataHist combData("combData","combined data",InvariantMass,Index(sample),Import("ALL",*dh_ALL),Import("PASSING",*dh_PASSING));
->    
->    RooSimultaneous simPdf("simPdf","simultaneous pdf",sample) ;
->    
->    simPdf.addPdf(*model,"ALL");
->    simPdf.addPdf(*model_pass,"PASSING");
->    
->    RooFitResult* fitres = new RooFitResult;
->    fitres = simPdf.fitTo(combData, RooFit::Save());
->    
->    // OUTPUT ARRAY
->    double* output = new double[4];
->    
->    RooRealVar* yield_ALL = (RooRealVar*) fitres->floatParsFinal().find("n_signal_total");
->    RooRealVar* yield_PASS = (RooRealVar*) fitres->floatParsFinal().find("n_signal_total_pass");
->    
->    output[0] = yield_ALL->getVal();
->    output[1] = yield_PASS->getVal();
->    
->    output[2] = yield_ALL->getError();
->    output[3] = yield_PASS->getError();
->    
->    frame->SetTitle("ALL");
->    frame->SetXTitle("#mu^{+}#mu^{-} invariant mass [GeV/c^{2}]");
->    Data_ALL->plotOn(frame);
+>     RooDataHist* dh_ALL     = Data_ALL->binnedClone();
+>     RooDataHist* dh_PASSING = Data_PASSING->binnedClone();
+>     
+>     RooPlot *frame = InvariantMass.frame(RooFit::Title("Invariant Mass"));
+>~~~
+>{: .language-cpp}
 >
->    model->plotOn(frame);
->    model->plotOn(frame,RooFit::Components("signal1"),RooFit::LineStyle(kDashed),RooFit::LineColor(kGreen));
->    model->plotOn(frame,RooFit::Components("signal2"),RooFit::LineStyle(kDashed),RooFit::LineColor(kMagenta - 5));
->    model->plotOn(frame,RooFit::Components("signal3"),RooFit::LineStyle(kDashed),RooFit::LineColor(kOrange));
->    model->plotOn(frame,RooFit::Components("background"),RooFit::LineStyle(kDashed),RooFit::LineColor(kRed));
->    
->    c_all->cd();
->    frame->Draw("");
->    
->    RooPlot *frame_pass = InvariantMass.frame(RooFit::Title("Invariant Mass"));
->    
->    c_pass->cd();
->    
->    frame_pass->SetTitle("PASSING");
->    frame_pass->SetXTitle("#mu^{+}#mu^{-} invariant mass [GeV/c^{2}]");
->    Data_PASSING->plotOn(frame_pass);
->    
->    model_pass->plotOn(frame_pass);
->    model_pass->plotOn(frame_pass,RooFit::Components("signal1"),RooFit::LineStyle(kDashed),RooFit::LineColor(kGreen));
->    model_pass->plotOn(frame_pass,RooFit::Components("signal2"),RooFit::LineStyle(kDashed),RooFit::LineColor(kMagenta - 5));
->    model_pass->plotOn(frame_pass,RooFit::Components("signal3"),RooFit::LineStyle(kDashed),RooFit::LineColor(kOrange));
->    model_pass->plotOn(frame_pass,RooFit::Components("background"),RooFit::LineStyle(kDashed),RooFit::LineColor(kRed));
->    
->    frame_pass->Draw();
->    
->    string file     = "Fit Result/";
->    string all_pdf  = "_ALL.pdf";
->    string pass_pdf = "_PASS.pdf";
->    
->    if(save)
->    {
->        c_pass->SaveAs(strcat(strcat(file,condition), all_pdf));
->        c_all->SaveAs(strcat(strcat(file, condition),pass_pdf));
->    }
->        
->    // DELETING ALLOCATED MEMORY
->    delete file0;
->    
->    delete Data_ALL;
->    delete Data_PASSING;
->    //
->    delete dh_ALL;
->    delete dh_PASSING;
->    //
->    delete cutvar;
->    delete redeuce;
->    //
->    delete signal;
->    //
->    delete c_all;
->    delete c_pass;
->    //
->    delete model;
->    delete model_pass;
+>~~~
+>     // BACKGROUND VARIABLES
+>     RooRealVar a0("a0", "a0", 0, -10, 10);
+>     RooRealVar a1("a1", "a1", 0, -10, 10);
+> 
+>     // BACKGROUND FUNCTION
+>     RooChebychev background("background","background", InvariantMass, RooArgList(a0,a1));
+>     
+>     // GAUSSIAN VARIABLES
+>     RooRealVar sigma("sigma","sigma",init_conditions[3]);
+>     RooRealVar mean1("mean1","mean1",init_conditions[0]);
+>     RooRealVar mean2("mean2","mean2",init_conditions[1]); =(    RooRealVar mean3("mean3","mean3",init_conditions[2]);>.0    // CRYSTAL BALL VARIABLES
+>     RooRealVar alpha("alpha","alpha", 1.4384e+00); =(    RooRealVar n("n", "n", 1.6474e+01);>.0    // FIT FUNCTIONS
+>     RooCBShape  gaussian1("signal1","signal1",InvariantMass,mean1,sigma, alpha, n); =(    RooGaussian gaussian2("signal2","signal2",InvariantMass,mean2,sigma);>.0    RooGaussian gaussian3("signal3","signal3",InvariantMass,mean3,sigma);
+>     
+>     double n_signal_initial1 =(Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.015",init_conditions[1]))-Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.030&&abs(InvariantMass-%g)>.015",init_conditions[1],init_conditions[1]))) / Data_ALL->sumEntries();
+>     double n_signal_initial2 =(Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.015",init_conditions[2]))-Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.030&&abs(InvariantMass-%g)>.015",init_conditions[2],init_conditions[2]))) / Data_ALL->sumEntries();
+>     double n_signal_initial3 =(Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.015",init_conditions[3]))-Data_ALL->sumEntries(TString::Format("abs(InvariantMass-%g)<0.030&&abs(InvariantMass-%g)>.015",init_conditions[3],init_conditions[3]))) / Data_ALL->sumEntries();
+>     
+>     double n_signal_initial_total = n_signal_initial1 + n_signal_initial2 + n_signal_initial3;
+>     
+>     double n_back_initial = 1. - n_signal_initial1 - n_signal_initial2 -n_signal_initial3;
+>     
+>     RooRealVar n_signal_total("n_signal_total","n_signal_total",n_signal_initial_total,0.,Data_ALL->sumEntries());
+>     RooRealVar n_signal_total_pass("n_signal_total_pass","n_signal_total_pass",n_signal_initial_total,0.,Data_PASSING->sumEntries());
+>     
+>     RooRealVar n_back("n_back","n_back",n_back_initial,0.,Data_ALL->sumEntries());
+>     RooRealVar n_back_pass("n_back_pass","n_back_pass",n_back_initial,0.,Data_PASSING->sumEntries());
+>
+>     RooRealVar frac1("frac1","frac1",7.1345e-01);
+>     RooRealVar frac2("frac2","frac2",1.9309e-01);
+>~~~
+>{: .language-cpp}
+>
+>~~~
+>     RooAddPdf* signal;
+>     RooAddPdf* model;
+>     RooAddPdf* model_pass;
+>     
+>     signal      = new RooAddPdf("signal", "signal", RooArgList(gaussian1, gaussian2,gaussian3), RooArgList(frac1, frac2));
+>     model      = new RooAddPdf("model","model", RooArgList(*signal, background),RooArgList(n_signal_total, n_back));
+>     model_pass = new RooAddPdf("model_pass", "model_pass", RooArgList(*signal, background),RooArgList(n_signal_total_pass, n_back_pass));
+>     
+>     // SIMULTANEOUS FIT
+>     RooCategory sample("sample","sample") ;
+>     sample.defineType("All") ;
+>     sample.defineType("PASSING") ;
+>     
+>     RooDataHist combData("combData","combined data",InvariantMass,Index(sample),Import("ALL",*dh_ALL),Import("PASSING",*dh_PASSING));
+>     
+>     RooSimultaneous simPdf("simPdf","simultaneous pdf",sample) ;
+>     
+>     simPdf.addPdf(*model,"ALL");
+>     simPdf.addPdf(*model_pass,"PASSING");
+>     
+>     RooFitResult* fitres = new RooFitResult;
+>     fitres = simPdf.fitTo(combData, RooFit::Save());
+> ~~~
+>{: .language-cpp}
+>
+>~~~
+>     // OUTPUT ARRAY
+>     double* output = new double[4];
+>     
+>     RooRealVar* yield_ALL = (RooRealVar*) fitres->floatParsFinal().find("n_signal_total");
+>     RooRealVar* yield_PASS = (RooRealVar*) fitres->floatParsFinal().find("n_signal_total_pass");
+>     
+>     output[0] = yield_ALL->getVal();
+>     output[1] = yield_PASS->getVal();
+>     
+>     output[2] = yield_ALL->getError();
+>     output[3] = yield_PASS->getError();
+>
+>     
+>     frame->SetTitle("ALL");
+>     frame->SetXTitle("#mu^{+}#mu^{-} invariant mass [GeV/c^{2}]");
+>     Data_ALL->plotOn(frame);
+>     
+>     model->plotOn(frame);
+>     model->plotOn(frame,RooFit::Components("signal1"),RooFit::LineStyle(kDashed),RooFit::LineColor(kGreen));
+>     model->plotOn(frame,RooFit::Components("signal2"),RooFit::LineStyle(kDashed),RooFit::LineColor(kMagenta - 5));
+>     model->plotOn(frame,RooFit::Components("signal3"),RooFit::LineStyle(kDashed),RooFit::LineColor(kOrange));
+>     model->plotOn(frame,RooFit::Components("background"),RooFit::LineStyle(kDashed),RooFit::LineColor(kRed));
+>     
+>     c_all->cd();
+>     frame->Draw("");
+>     
+>     RooPlot *frame_pass = InvariantMass.frame(RooFit::Title("Invariant Mass"));
+>     
+>     c_pass->cd();
+>     
+>     frame_pass->SetTitle("PASSING");
+>     frame_pass->SetXTitle("#mu^{+}#mu^{-} invariant mass [GeV/c^{2}]");
+>     Data_PASSING->plotOn(frame_pass);
+>     
+>     model_pass->plotOn(frame_pass);
+>     model_pass->plotOn(frame_pass,RooFit::Components("signal1"),RooFit::LineStyle(kDashed),RooFit::LineColor(kGreen));
+>     model_pass->plotOn(frame_pass,RooFit::Components("signal2"),RooFit::LineStyle(kDashed),RooFit::LineColor(kMagenta - 5));
+>     model_pass->plotOn(frame_pass,RooFit::Components("signal3"),RooFit::LineStyle(kDashed),RooFit::LineColor(kOrange));
+>     model_pass->plotOn(frame_pass,RooFit::Components("background"),RooFit::LineStyle(kDashed),RooFit::LineColor(kRed));
+>     
+>     frame_pass->Draw();
+> 
+>     if(save)
+>     {
+>         c_pass->SaveAs(("Fit Result/" + condition + "_ALL.pdf").c_str());
+>         c_all->SaveAs (("Fit Result/" + condition + "_PASS.pdf").c_str());
+>     }
+>         
+>     // DELETING ALLOCATED MEMORY
+>     delete[] limits;
+>     //
+>     delete file0;
+>     //
+>     delete Data_ALL;
+>     delete Data_PASSING;
+>     //
+>     delete dh_ALL;
+>     delete dh_PASSING;
+>     //
+>     delete cutvar;
+>     delete redeuce;
+>     //
+>     delete signal;
+>     //
+>     delete c_all;
+>     delete c_pass;
+>     //
+>     delete model;
+>     delete model_pass;
 >    delete fitres;
 >    
 >    return output;
@@ -363,13 +376,12 @@ and if you’re starting with **RooFit** you may find [_this one_ ](https://indi
 > ~~~
 > {: .language-cpp}
 >
+>
+>
+>
+>
 > 
 {: .solution}
-
-the DoFit.cpp function executes a simultaneous fit to two two event categories (Passingand All).
-
-After understanding the basics of how fitting with *RooFit* works, fill in the `init_conditions` with initial approximations (starting values for the fit parametersi) that you find reasonable for each parameter.
-I recommend plotting the invariant mass of our dataset again and choosing the values as close as possible to the 'real' ones.
 
 
 Now we only need to create a loop to fit each bin and save the yields and associated errors in order to get the efficiency. This is achieved by:
