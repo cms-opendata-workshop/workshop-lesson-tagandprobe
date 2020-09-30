@@ -187,16 +187,16 @@ or use the suggested values
 
 We are now ready to execute the fits!
 
->## The Fit
->
->We executed a simultaneous fit using a gaussian curve and a crystall ball function for the fist peak (1S) and a gaussian for the remaining peaks. For the background we used a chebychev >polynomial. The function used, `DoFit.cpp` was base on the [RooFit](https://root.cern.ch/doc/master/group__Roofit.html) library.
->
->You can find generic tutorials for this library [_here_](https://root.cern.ch/doc/master/group__tutorial__roofit.html).
->If you’re starting with **RooFit** you may also find [_this one_ >](https://indico.scc.kit.edu/event/31/contributions/1864/attachments/1105/1550/lukas_hehn_kseta-workshop_introduction-to-RooFit.pdf) particularly useful.
->
->You won't need to do anything in ``DoFit.cpp`` but you can check it out if you're curious. 
->
-> ## Check out `DoFit.cpp`
+## The Fit
+
+We executed a simultaneous fit using a gaussian curve and a crystall ball function for the fist peak (1S) and a gaussian for the remaining peaks. For the background we used a chebychev polynomial. The function used, `DoFit.cpp` was base on the [RooFit](https://root.cern.ch/doc/master/group__Roofit.html) library.
+
+You can find generic tutorials for this library [_here_](https://root.cern.ch/doc/master/group__tutorial__roofit.html).
+If you’re starting with **RooFit** you may also find [_this one_ ](https://indico.scc.kit.edu/event/31/contributions/1864/attachments/1105/1550/lukas_hehn_kseta-workshop_introduction-to-RooFit.pdf) particularly useful.
+
+You won't need to do anything in ``DoFit.cpp`` but you can check it out if you're curious. 
+
+>## Check out `DoFit.cpp`
 >The code here is presented in smaller "digestible" chunks, so it's easier to understand.
 >
 >We begin by linking our dataset to a usable object ( the [**TTree**](https://root.cern.ch/doc/v612/classTTree.html) ) and by creating a [**TCanvas**](https://root.cern.ch/doc/master/classTCanvas.html) to store the fit plots.
@@ -246,7 +246,7 @@ We are now ready to execute the fits!
 >We then create the variables used as parameters in the fit. **a0** and **a1** used in the Chebychev polynomial ([**RooChebychev**](https://root.cern.ch/doc/master/classRooChebychev.html), for the background
 >and **sigma**, **mean1**,  **mean2**,  **mean3** used on the [**RooCBShape**](https://root.cern.ch/doc/master/classRooCBShape.html) and [**RooGaussian**](https://root.cern.ch/doc/master/classRooGaussian.html) for the signal. **frac1** and **frac2** are used as normalization values.
 
-For the yields of the fits, we defined the **n_signal** and **n_background** pairs.
+>For the yields of the fits, we defined the **n_signal** and **n_background** pairs.
 >
 >~~~
 >     // BACKGROUND VARIABLES
