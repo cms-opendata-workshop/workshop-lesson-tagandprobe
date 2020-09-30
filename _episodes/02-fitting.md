@@ -189,6 +189,7 @@ We are now ready to execute the fits!
 
 ## The Fit
 
+We used a gaussian and a crystall ball function for the fist peak (1S) and a gaussian for the remaining peaks. For the background we used a chebychev polynomial.
 The fits in this tutorial will be executed using the `/src/DoFit.cpp` function based on the [RooFit](https://root.cern.ch/doc/master/group__Roofit.html) library.
 
 You can find generic tutorials [_here_](https://root.cern.ch/doc/master/group__tutorial__roofit.html).
@@ -197,7 +198,11 @@ and if you’re starting with **RooFit** you may find [_this one_ ](https://indi
 You won't need to do anything in ``DoFit.cpp`` but you can check it out if you're curious. 
 
 > ## Check out `DoFit.cpp`
->We've divided the code into smaller "digestible" chunks, so it's easier to understand.
+>The code here is presented in smaller "digestible" chunks, so it's easier to understand.
+>
+>We begin by linking our dataset to a usable object ( the [**TTree**](https://root.cern.ch/doc/v612/classTTree.html) ) and by creating a [**TCanvas**](https://root.cern.ch/doc/master/classTCanvas.html) to store the fit plots.
+>
+>we then define a few [**RooRealVar**](https://root.cern.ch/doc/master/classRooRealVar.html) and [**RooFormulaVar**](https://root.cern.ch/doc/master/classRooFormulaVar.html) objects will be used to select the bin associated to the **string** ```condition``` (i.e. "ProbeMuon_Pt > 10 && ProbeMuon_Pt < 10"). After spliting the original dataset, the resulting two [**RooDataSet**](https://root.cern.ch/doc/master/classRooDataSet.html) are used to create two binned [**RooDataHist**](https://root.cern.ch/doc/master/classRooDataHist.html) in which we'll perform the fits.
 > ~~~
 > double* doFit(string condition, string MuonID_str, string quant, double* init_conditions, bool save = true)
 >{
@@ -210,6 +215,7 @@ You won't need to do anything in ``DoFit.cpp`` but you can check it out if you'r
 >     RooRealVar MuonID(MuonID_str.c_str(), MuonID_str.c_str(), 0, 1); //Muon_Id
 >     
 >     RooRealVar InvariantMass("InvariantMass", "InvariantMass", 9, 10.8);
+>     RooPlot *frame = InvariantMass.frame(RooFit::Title("Invariant Mass"));
 >     
 >     double* limits = new double[2];
 >     if (quant == "Pt") {
@@ -235,9 +241,11 @@ You won't need to do anything in ``DoFit.cpp`` but you can check it out if you'r
 >     RooDataHist* dh_ALL     = Data_ALL->binnedClone();
 >     RooDataHist* dh_PASSING = Data_PASSING->binnedClone();
 >     
->     RooPlot *frame = InvariantMass.frame(RooFit::Title("Invariant Mass"));
 >~~~
 >{: .language-cpp}
+>
+>We then create the variables used as parameters in the fit. **a0** and **a1** used in the Chebychev polynomial ([**RooChebychev**](https://root.cern.ch/doc/master/classRooChebychev.html)
+>and the variables **sigma**, **mean1**,  **mean2**,  **mean3** used on the [**RooCBShape**](https://root.cern.ch/doc/master/classRooCBShape.html) and [**RooGaussian**](https://root.cern.ch/doc/master/classRooGaussian.html)
 >
 >~~~
 >     // BACKGROUND VARIABLES
