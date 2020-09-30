@@ -187,16 +187,15 @@ or use the suggested values
 
 We are now ready to execute the fits!
 
-## The Fit
-
-We used a gaussian and a crystall ball function for the fist peak (1S) and a gaussian for the remaining peaks. For the background we used a chebychev polynomial.
-The fits in this tutorial will be executed using the `/src/DoFit.cpp` function based on the [RooFit](https://root.cern.ch/doc/master/group__Roofit.html) library.
-
-You can find generic tutorials [_here_](https://root.cern.ch/doc/master/group__tutorial__roofit.html).
-and if you’re starting with **RooFit** you may find [_this one_ ](https://indico.scc.kit.edu/event/31/contributions/1864/attachments/1105/1550/lukas_hehn_kseta-workshop_introduction-to-RooFit.pdf) particularly useful.
-
-You won't need to do anything in ``DoFit.cpp`` but you can check it out if you're curious. 
-
+>## The Fit
+>
+>We executed a simultaneous fit using a gaussian curve and a crystall ball function for the fist peak (1S) and a gaussian for the remaining peaks. For the background we used a chebychev >polynomial. The function used, `DoFit.cpp` was base on the [RooFit](https://root.cern.ch/doc/master/group__Roofit.html) library.
+>
+>You can find generic tutorials for this library [_here_](https://root.cern.ch/doc/master/group__tutorial__roofit.html).
+>If you’re starting with **RooFit** you may also find [_this one_ >](https://indico.scc.kit.edu/event/31/contributions/1864/attachments/1105/1550/lukas_hehn_kseta-workshop_introduction-to-RooFit.pdf) particularly useful.
+>
+>You won't need to do anything in ``DoFit.cpp`` but you can check it out if you're curious. 
+>
 > ## Check out `DoFit.cpp`
 >The code here is presented in smaller "digestible" chunks, so it's easier to understand.
 >
@@ -247,7 +246,7 @@ You won't need to do anything in ``DoFit.cpp`` but you can check it out if you'r
 >We then create the variables used as parameters in the fit. **a0** and **a1** used in the Chebychev polynomial ([**RooChebychev**](https://root.cern.ch/doc/master/classRooChebychev.html), for the background
 >and **sigma**, **mean1**,  **mean2**,  **mean3** used on the [**RooCBShape**](https://root.cern.ch/doc/master/classRooCBShape.html) and [**RooGaussian**](https://root.cern.ch/doc/master/classRooGaussian.html) for the signal. **frac1** and **frac2** are used as normalization values.
 
-For the yields of the fits, 
+For the yields of the fits, we defined the **n_signal** and **n_background** pairs.
 >
 >~~~
 >     // BACKGROUND VARIABLES
@@ -284,12 +283,14 @@ For the yields of the fits,
 >~~~
 >{: .language-cpp}
 >
+>After defining the individual [_pdfs_ ](https://en.wikipedia.org/wiki/Probability_density_function) that will be used in the fit, we add them together to make our model with the signal and background. We then combine the data onto a [**RooSimultaneous**](https://root.cern.ch/doc/master/classRooSimultaneous.html) so that we can execute a simultaneous fit with the [**fitTo**](https://root.cern.ch/doc/master/classRooAbsPdf.html#af43c48c044f954b0e0e9d4fe38347551) method. The fit result is then stored.
+>
 >~~~
 >     RooAddPdf* signal;
 >     RooAddPdf* model;
 >     RooAddPdf* model_pass;
 >     
->     signal      = new RooAddPdf("signal", "signal", RooArgList(gaussian1, gaussian2,gaussian3), RooArgList(frac1, frac2));
+>     signal     = new RooAddPdf("signal", "signal", RooArgList(gaussian1, gaussian2,gaussian3), RooArgList(frac1, frac2));
 >     model      = new RooAddPdf("model","model", RooArgList(*signal, background),RooArgList(n_signal_total, n_back));
 >     model_pass = new RooAddPdf("model_pass", "model_pass", RooArgList(*signal, background),RooArgList(n_signal_total_pass, n_back_pass));
 >     
@@ -307,10 +308,7 @@ For the yields of the fits,
 >     
 >     RooFitResult* fitres = new RooFitResult;
 >     fitres = simPdf.fitTo(combData, RooFit::Save());
-> ~~~
->{: .language-cpp}
 >
->~~~
 >     // OUTPUT ARRAY
 >     double* output = new double[4];
 >     
@@ -322,8 +320,10 @@ For the yields of the fits,
 >     
 >     output[2] = yield_ALL->getError();
 >     output[3] = yield_PASS->getError();
->
->     
+> ~~~
+>{: .language-cpp}
+>The rest of the code has to do with the plotting of the fit and with memory management.
+>~~~     
 >     frame->SetTitle("ALL");
 >     frame->SetXTitle("#mu^{+}#mu^{-} invariant mass [GeV/c^{2}]");
 >     Data_ALL->plotOn(frame);
@@ -394,8 +394,7 @@ For the yields of the fits,
 > 
 {: .solution}
 
-
-Now we only need to create a loop to fit each bin and save the yields and associated errors in order to get the efficiency. This is achieved by:
+The fitting and storing of the fit output of each bin is achieved by the following loop
 
 ~~~
 for (int i = 0; i < bin_n; i++)
