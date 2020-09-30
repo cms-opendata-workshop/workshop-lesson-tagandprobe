@@ -11,12 +11,12 @@ objectives:
 
 keypoints:
 - "The dataset for this tutorial contemplates one Muon Id (Tracker Muon) and further contains the three kinematic variables (pT, Eta, Phi)"
-- "You'll only need to change the ```/src/DoFit.cpp``` file if some of the fits aren't usable. Apart from that everything will be done on the ```Efficiency.C```"
+- "Everything in this tutorial should be done using only the ```Efficiency.C``` file"
 - "Documentation available [here](https://github.com/AthomsG/LIP_INTERNSHIP/blob/master/Documentation.md)"
 ---
 ## Prerequisite
 
-To prepare for this tutorial, clone the respective github repository
+To prepare for this tutorial, clone the respective github repository to you "Não faço idea para onde tem de ser copiado este repositório"
 
 ~~~
 git clone git://github.com/AthomsG/CMS-tutorial
@@ -113,8 +113,6 @@ The dataset used in this exercise has been collected by the CMS experiment, in p
 | ProbeMuon_Eta |
 | ProbeMuon_Phi|
 
-Open `Efficiency.C`.
-
 We'll start by calculating the efficiency as a function of pT.
 It is useful to have an idea of the distribution of the quantity we want to study. In order to do this, we’ll repeat the steps perviously used to plot the invariant mass, but now for the **ProbeMuon_Pt** variable.
 
@@ -133,6 +131,30 @@ UPSILON_DATA->Draw("ProbeMuon_Pt", "ProbeMuon_Pt < 20")
 {: .language-bash}
 
 <img width="500px" src="../fig/zoom.png">
+
+Now that you're acquainted with the data, open the  `Efficiency.C` file. 
+You'll have to make some small adjustments to the code in this section:
+
+~~~
+/*-----------------------------------I N S E R T    C O D E    H E R E-----------------------------------*/
+double bins[] = {...};
+int bin_n     = ...;
+
+string* conditions = get_conditions(bin_n, bins, "ProbeMuon_" + quantity); // (1)
+
+//Now we must choose initial conditions in order to fit our data
+double *init_conditions = new double[4];
+/*-----------------------------------I N S E R T    C O D E    H E R E-----------------------------------*/
+init_conditions[0] = /*peak1*/;
+init_conditions[1] = /*peak2*/;
+init_conditions[2] = /*peak3*/;
+init_conditions[3] = /*sigma*/;
+~~~
+{: .language-cpp}
+
+We'll start by 
+
+
 
 Now that we have a clear view of the transverse momentum, we can choose the appropriate bins for our fit. Remember that we need a fair amount of data in order to have a good fit, so be careful not to include too few events on a given bin. We've left a suggestion for an appropriate bin setup on `Bin_Suggestion.txt`
 
