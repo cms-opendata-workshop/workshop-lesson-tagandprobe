@@ -1,7 +1,7 @@
 ---
 title: "The Fitting Method"
-teaching: 5
-exercises: 25
+teaching: 20
+exercises: 10
 questions:
 - "What is this fitting method?"
 - "how do we use it to calculate the efficiency?"
@@ -11,7 +11,7 @@ objectives:
 
 keypoints:
 - "The dataset for this tutorial contemplates one Muon Id (Tracker Muon) and further contains the three kinematic variables (pT, Eta, Phi)"
-- "Everything in this tutorial should be done using only the ```Efficiency.C``` file"
+- "Everything in this tutorial should be done using only the ```Efficiency.C``` file. The "**check out** sections" are only for you to see what's going on under the hood"
 - "Documentation available [here](https://github.com/AthomsG/LIP_INTERNSHIP/blob/master/Documentation.md)"
 ---
 ## Prerequisite
@@ -387,10 +387,6 @@ You won't need to do anything in ``DoFit.cpp`` but you can check it out if you'r
 > ~~~
 > {: .language-cpp}
 >
->
->
->
->
 > 
 {: .solution}
 
@@ -408,17 +404,12 @@ for (int i = 0; i < bin_n; i++)
 {:  .language-cpp}
 The ```McYield``` function has the same output as ```DoFit``` and has to do with Monte Carlo dataset, which only contains signal for the 1S peak.
 
-To get the efficiency plot, we'll use the [TEfficiency](https://root.cern.ch/doc/master/classTEfficiency.html)  class.
+To get the efficiency plot, we used the [TEfficiency](https://root.cern.ch/doc/master/classTEfficiency.html)  class.
 You'll see that in order to create a ``TEfficiency`` object, one of the [constructors required](https://root.cern.ch/doc/master/classTEfficiency.html#aa0e99b4161745fd3bee0ae5c0f58880e) requires two ``TH1``objects. One with _All_ the probes and one with the _Passing_ probes.
 
-> ## Important note
->You musn't forget to add the fitting errors to the yield histograms. Using ``/src/make_hist.cpp``  will guarantee that the errors are included.
-> 
-{: .callout}
+The creation of these ``TH1`` objects is taken care of by the ``make_hist.cpp``.
 
-The creation of these ``TH1`` objects is taken care of by the ``/src/make_hist.cpp`` function.
-
-> ## Open `make_hist.cpp`
+> ## Check out `make_hist.cpp`
 >
 > ~~~
 > double* doFit(string condition, string MuonID_str, double* init_conditions, bool save = TRUE) // RETURNS ARRAY WITH [yield_all, yield_pass, err_all, err_pass]    ->   OUTPUT ARRAY
@@ -448,9 +439,9 @@ The creation of these ``TH1`` objects is taken care of by the ``/src/make_hist.c
 > 
 {: .solution}
 
-To plot the efficiency we'll the use the ``/src/get_efficiency.cpp`` function.
+To plot the efficiency we used the ``get_efficiency.cpp`` function.
 
-> ## Open `get_efficiency.cpp`
+> ## Check out `get_efficiency.cpp`
 >
 > ~~~
 >TEfficiency* get_efficiency(TH1F* ALL, TH1F* PASS)ID_str, double* init_conditions, bool save = TRUE) // RETURNS ARRAY WITH [yield_all, yield_pass, err_all, err_pass]    ->   OUTPUT ARRAY
@@ -486,7 +477,7 @@ To plot the efficiency we'll the use the ``/src/get_efficiency.cpp`` function.
 > 
 {: .solution}
 
-to run your code, type:
+Now that you understand what the ``Efficiency.C`` macro does, run your code with:
 ~~~
 root Efficiency.C -q
 ~~~
@@ -509,15 +500,13 @@ If you click on ``Efficiency_Run2011.root``, a plot will show up with the effici
 
 Now we must re-run the code, but before that, change ``DataIsMc`` value to **TRUE**. This will generate an efficiency for the simulated data, so that we can compare it with the 2011 run.
 
-Check that you have both ```Efficiency_Run2011.root``` and ```Efficiency_MC.root``` files in each of these directories:
+Check that you have both ```Efficiency_Run2011.root``` and ```Efficiency_MC.root``` files in the following directory:
 
 <ul>
 <li>Efficiency Result/pT</li>
-<li>Efficiency Result/Eta</li>
-<li>Efficiency Result/Phi</li>
 </ul>
 
-If so, uncomment:
+If so, uncomment ``Efficiency.C`` line: 66:
 
 ~~~
 //compare_efficiency(quantity, "Efficiency_Result/Pt/Efficiency_Run2011.root", "Efficiency_Result/Pt/Efficiency_MC.root");
@@ -525,8 +514,8 @@ If so, uncomment:
 {: .language-cpp}
 
 and run the macro again.
-You should get something like the following result. If so, repeat this process for the two quantites left to go, Eta and Phi!
-In case you want to change on of the fits, use the ```change_bin.cpp```function.
+You should get something like the following result. If everything went well and you still have time to go, repeat this process for the two quantites left to go, Eta and Phi!
+In case you want to change one of the fit results, use the ```change_bin.cpp``` function commented on line:61.
 
 <img width="500px" src="../fig/Efficiency_thomas.png">
 
