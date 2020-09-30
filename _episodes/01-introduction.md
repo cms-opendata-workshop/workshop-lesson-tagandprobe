@@ -21,14 +21,14 @@ The determination of the detector efficiency is a critical ingredient in any phy
 
 ## What is "tag" and "probe"?
 
-The resonance  decays to a pair of particles: the tag and the probe. 
+The resonance used to calculate the efficiency decays to a pair of particles: the tag and the probe. 
 
 * Tag muon = well identified, triggered muon (tight selection criteria).
 * Probe muon = unbiased set of muon candidates (very loose selection criteria), either passing or failing the criteria for which the efficiency is to be measured.
 
-## How to get an efficiency?
+## How do we calculate the efficiency?
 
-The efficiency is given by the fraction of probe muons that pass the criteria:
+The efficiency is given by the fraction of probe muons that pass a given criteria (in this case, the Muon Id):
 
 <img width="300px" src="../fig/efficiency.svg" alt="Efficiency equation">
 
