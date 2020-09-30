@@ -27,7 +27,7 @@ git clone git://github.com/AthomsG/CMS-tutorial
 
 First, a brief explanation of the method we’ll be studying. It consists in fitting the invariantmass of the tag+probe pairs, in the two categories: passing probes, and all probes. 
 The fit allows to statistically discriminate between signal and background. To compute the efficiency we simply divide the signal yield from the fits to the Passing category by the signal yield from the fit the inclusive (All) category. The following image illustrates the procedure.
-The procedure is applied after splitting the dataset in bins of a kinematic variable of theprobe (e.g. the traverse momentum); as such, the efficiency will be measured as a functionof that quantity.
+The procedure is applied after splitting the dataset in bins of a kinematic variable of theprobe (e.g. the traverse momentum); as such, the efficiency will be measured as a function of that quantity.
 
 <img width="700px" src="../fig/esquema.png">
 

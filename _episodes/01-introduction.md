@@ -14,7 +14,7 @@ keypoints:
 - "The efficiency we are looking in this exercise is for tracker muons."
 ---
 
-## What is tag and probe method?
+## What is the tag and probe method?
 
 The **tag and probe** method is a **data-driven technique** for measuring particle detection efficiencies. It is based on the decays of known resonances (e.g. J/ψ, ϒ and Z) to pairs of the particles being studied. In this exercise, these particles are muons, and the ϒ(1S) resonance is nominally used.
 
