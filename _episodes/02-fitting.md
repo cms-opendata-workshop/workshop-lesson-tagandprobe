@@ -23,7 +23,7 @@ git clone git://github.com/AthomsG/CMS-tutorial
 ~~~
 {: .language-bash}
 
-### A brief explanation of this repository
+<h3>A brief explanation of this repository</h3>
 The repository you'll use only requires you to make changes on the ``Efficiency.C`` macro. These changes are highligthed as such:
 
 ~~~
