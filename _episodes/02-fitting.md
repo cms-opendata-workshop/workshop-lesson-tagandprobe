@@ -512,7 +512,7 @@ new TBrowser
 A window like this should have popped up.
 If you click on ``Efficiency_Run2011.root``, a plot will show up with the efficiency value for each bin!
 
-Now we must re-run the code, but before that, change ``DataIsMc`` value to **TRUE**. This will generate an efficiency for the simulated data, so that we can compare it with the 2011 run.
+Now we must re-run the code, but before that, change ``DataIsMc`` value to **TRUE** (line:12 on ```Efficiency.C). This will generate an efficiency for the simulated data, so that we can compare it with the 2011 run.
 
 Check that you have both ```Efficiency_Run2011.root``` and ```Efficiency_MC.root``` files in the following directory:
 
