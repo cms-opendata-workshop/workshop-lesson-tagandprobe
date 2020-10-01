@@ -534,13 +534,12 @@ You should get something like the following result. If everything went well and 
 
 > ## Important note!
 >
-> Don't forget to comment line:68
+> Don't forget to comment line:68 when repeating the procedure for the other quantities!
 >~~~
 >compare_efficiency(quantity, "Efficiency Result/" + quantity + "/Efficiency_MC.root", "Efficiency Result/" + quantity + "/Efficiency_Run2011.root");
 >~~~
 >{: .language-cpp}
 > 
->when repeating procedure for other quantities.
 {: .callout}
 
 > ## Extra challenge
