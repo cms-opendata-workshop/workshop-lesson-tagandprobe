@@ -528,8 +528,7 @@ If so, uncomment ``Efficiency.C`` line: 66:
 {: .language-cpp}
 
 and run the macro again.
-You should get something like the following result. If everything went well and you still have time to go, repeat this process for the two quantites left to go, Eta and Phi! (line:16 on ```Efficiency.C```)
-In case you want to change one of the fit results, use the ```change_bin.cpp``` function commented on line:61.
+You should get something like the following result. If everything went well and you still have time to go, repeat this process for the two quantites left to go, Eta and Phi (line:16 on ```Efficiency.C```) and then repeat the process!
 
 <img width="500px" src="../fig/Efficiency_thomas.png">
 
@@ -538,6 +537,8 @@ In case you want to change one of the fit results, use the ```change_bin.cpp``` 
 > Fancy some more work? download [this](https://drive.google.com/drive/folders/1YytJ7iTVYToUZemYIDLqr13wTjIYGERP?usp=sharing) J/ψ dataset and try out the new methods you just learned!
 >You'll have to change the DoFit.cpp function since J/ψ's only peak is made up of a crystall ball and a gaussian curve.
 >Good luck!
+>
+>In case you want to change one of the fit results, use the ```change_bin.cpp``` function commented on line:61.
 {: .challenge}
 
 {% include links.md %}
