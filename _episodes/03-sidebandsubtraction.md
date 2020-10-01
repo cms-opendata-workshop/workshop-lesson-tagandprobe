@@ -16,7 +16,7 @@ keypoints:
 
 ### Signal extraction: sideband subtraction method
 
-The reconstruction efficiency is calculated using **only signal muons**. This efficiency represents how well the tag and probe method reconstructed the resonance. So, in order to measure the efficiency, we need a way to extract signal from the dataset. You've used the fitting method and now you'll meet the sideband subtraction method.
+The reconstruction efficiency is calculated using **only signal muons**. In order to measure the efficiency, we need a way to extract signal from the dataset. You've used the fitting method and now you'll meet the sideband subtraction method.
 
 This method consists in choosing sideband and signal regions in invariant mass distribution. The sideband regions (shaded in red in the figure) have background particles and the signal region (shared in green in the figure) has background and signal particles.
 
