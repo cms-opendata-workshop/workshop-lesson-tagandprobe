@@ -512,7 +512,7 @@ new TBrowser
 A window like this should have popped up.
 If you click on ``Efficiency_Run2011.root``, a plot will show up with the efficiency value for each bin!
 
-Now we must re-run the code, but before that, change ``DataIsMc`` value to **TRUE** (line:12 on ```Efficiency.C). This will generate an efficiency for the simulated data, so that we can compare it with the 2011 run.
+Now we must re-run the code, but before that, change ``DataIsMc`` value to **TRUE** (line:12 on ```Efficiency.C```). This will generate an efficiency for the simulated data, so that we can compare it with the 2011 run.
 
 Check that you have both ```Efficiency_Run2011.root``` and ```Efficiency_MC.root``` files in the following directory:
 
@@ -528,7 +528,7 @@ If so, uncomment ``Efficiency.C`` line: 66:
 {: .language-cpp}
 
 and run the macro again.
-You should get something like the following result. If everything went well and you still have time to go, repeat this process for the two quantites left to go, Eta and Phi!
+You should get something like the following result. If everything went well and you still have time to go, repeat this process for the two quantites left to go, Eta and Phi! (line:16 on ```Efficiency.C```)
 In case you want to change one of the fit results, use the ```change_bin.cpp``` function commented on line:61.
 
 <img width="500px" src="../fig/Efficiency_thomas.png">
