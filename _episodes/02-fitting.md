@@ -28,6 +28,7 @@ To prepare for this tutorial, clone the respective github repository to the dire
 
 ~~~
 git clone git://github.com/AthomsG/CMS-tutorial
+cd CMS-tutorial
 ~~~
 {: .language-bash}
 
