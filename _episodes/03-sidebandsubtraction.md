@@ -30,7 +30,7 @@ For each event category (i.e. Pass and All), and for a given variable of interes
 
 <img width="440px" src="../fig/subtraction.svg" alt="Sideband Subtraction equation">
 
-Where the normalization α factor quantifies the quantity of background present in the signal region.
+Where the normalization α factor quantifies the quantity of background present in the signal region>
 
 <img width="450px" src="../fig/alpha.svg" alt="Alpha factor equation">
 
