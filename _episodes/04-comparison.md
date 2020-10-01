@@ -294,7 +294,7 @@ Now you can type the command below to **quit root** and close all created window
 
 To do the next part, first you need to understand how the fitting method code saves its files in a different way to the sideband subtraction method code. Lets look at how they are saved.
 
-If you look inside thr results folder for fitting method, you will see another folder named `trackermuon`. Inside of it you'll see:
+If you look inside `CMS-tutorial\Efficiency Result` folder, where is stored fitting method results, you will see another folder named `trackerMuon`. Inside of it you'll see:
 
 ![Invariant Mass histogram](../fig/prints/fitting_tracker.png)
 
