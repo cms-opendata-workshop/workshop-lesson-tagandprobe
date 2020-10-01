@@ -16,7 +16,7 @@ keypoints:
 
 ## Prerequisite
 
-Before to proceede, create a directory where the files of this lesson will be saved. If you are using CMSSW, create it in `CMSSW_5_3_32/src`. After going to the path you want to create a directory, run this command:
+Start by creating a directory where you'll store the files of this lesson. If you are using CMSSW, create it in `CMSSW_5_3_32/src`. On your working directory, run this command:
 
 ~~~
 mkdir workshop-tagandprobe
