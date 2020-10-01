@@ -16,6 +16,14 @@ keypoints:
 
 ## Prerequisite
 
+Before to proceede, create a directory where the files of this lesson will be saved. To do this, type this command:
+
+~~~
+mkdir workshop-tagandprobe
+cd workshop-tagandprobe
+~~~
+{: .language-bash}
+
 To prepare for this tutorial, clone the respective github repository to the directory you've created for this lesson by typing the following command on your terminal:
 
 ~~~
@@ -196,7 +204,7 @@ If you’re starting with **RooFit** you may also find [_this one_ ](https://ind
 
 You won't need to do anything in ``DoFit.cpp`` but you can check it out if you're curious. 
 
-> ## Check out `DoFit.cpp`
+>## Check out `DoFit.cpp`
 >The code here is presented in smaller "digestible" chunks, so it's easier to understand.
 >
 >We begin by linking our dataset to a usable object ( the [**TTree**](https://root.cern.ch/doc/v612/classTTree.html) ) and by creating a [**TCanvas**](https://root.cern.ch/doc/master/classTCanvas.html) to store the fit plots.
@@ -245,7 +253,7 @@ You won't need to do anything in ``DoFit.cpp`` but you can check it out if you'r
 >
 >We then create the variables used as parameters in the fit. **a0** and **a1** used in the Chebychev polynomial ([**RooChebychev**](https://root.cern.ch/doc/master/classRooChebychev.html), for the background
 >and **sigma**, **mean1**,  **mean2**,  **mean3** used on the [**RooCBShape**](https://root.cern.ch/doc/master/classRooCBShape.html) and [**RooGaussian**](https://root.cern.ch/doc/master/classRooGaussian.html) for the signal. **frac1** and **frac2** are used as normalization values.
->
+
 >For the yields of the fits, we defined the **n_signal** and **n_background** pairs.
 >
 >~~~
