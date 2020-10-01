@@ -16,7 +16,7 @@ keypoints:
 ---
 ## Prerequisite
 
-To prepare for this tutorial, clone the respective github repository to you "Não faço idea para onde tem de ser copiado este repositório"
+To prepare for this tutorial, clone the respective github repository to the directory you've created for this lesson by typing the following command on your terminal:
 
 ~~~
 git clone git://github.com/AthomsG/CMS-tutorial
