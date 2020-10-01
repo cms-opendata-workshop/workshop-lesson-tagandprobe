@@ -405,16 +405,16 @@ int useScheme = 1;
 
 //Root files and paths for Tefficiency objects inside these files
 const char* filePathsEff0[][2] = {
-	{"../[PATH_TO_RESULT_FITTING_FOLDER]/Upsilon/Tracker/pT/Efficiency_Run2011.root", "Efficiency"},
-	{"../[PATH_TO_RESULT_FITTING_FOLDER]/Upsilon/Tracker/Eta/Efficiency_Run2011.root", "Efficiency"},
-	{"../[PATH_TO_RESULT_FITTING_FOLDER]/Upsilon/Tracker/Phi/Efficiency_Run2011.root", "Efficiency"}
+	{"../../CMS-tutorial/Efficiency Result/Pt/Efficiency_Run2011.root", "Efficiency"},
+	{"../../CMS-tutorial/Efficiency Result/Eta/Efficiency_Run2011.root", "Efficiency"},
+	{"../../CMS-tutorial/Efficiency Result/Phi/Efficiency_Run2011.root", "Efficiency"}
 };
 
 //Root files and paths for Tefficiency objects inside these files
 const char* filePathsEff1[][2] = {
-	{"../[PATH_TO_RESULT_FITTING_FOLDER]/Upsilon/Tracker/pT/Efficiency_MC.root", "Efficiency"},
-	{"../[PATH_TO_RESULT_FITTING_FOLDER]/Upsilon/Tracker/Eta/Efficiency_MC.root", "Efficiency"},
-	{"../[PATH_TO_RESULT_FITTING_FOLDER]/Upsilon/Tracker/Phi/Efficiency_MC.root", "Efficiency"}
+	{"../../CMS-tutorial/Efficiency Result/Pt//Efficiency_MC.root", "Efficiency"},
+	{"../../CMS-tutorial/Efficiency Result/Eta//Efficiency_MC.root", "Efficiency"},
+	{"../../CMS-tutorial/Efficiency Result/Phi//Efficiency_MC.root", "Efficiency"}
 };
 
 //How comparisons will be saved
@@ -425,8 +425,6 @@ const char* resultNames[] = {
 };
 ~~~
 {: .language-cpp}
-
-Changing `[PATH_TO_RESULT_FITTING_FOLDER]` to the relative path to result folder for fitting method.
 
 Doing this and running the program with:
 
