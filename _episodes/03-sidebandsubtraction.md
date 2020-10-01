@@ -96,7 +96,7 @@ Your `efficiency_tagandprobe` folder should have these files:
 
 ![Files in efficiency_tagandprobe folder](../fig/files_sideband.png)
 
-## Preparing code for Run 2011
+## Preparing code for Data
 
 > I will teach you to manage the files on the terminal, but you can use a graphical file explorer.
 
@@ -408,7 +408,7 @@ Done. All result files can be found at "../results/Upsilon_Run_2011/"
 > 
 {: .callout}
 
-## Probe Efficiency results for Run 2011
+## Probe Efficiency results for Data
 
 If all went well, your results are going to be like these:
 
