@@ -10,7 +10,7 @@ objectives:
 - "Learn how to implement this method using ROOT library for c++"
 keypoints:
 - "The dataset for this tutorial contemplates one Muon Id (Tracker Muon) and further contains the three kinematic variables (pT, Eta, Phi)"
-- "Everything in this tutorial should be done using only the ```Efficiency.C``` file. The "**check out** sections" are only for you to see what's going on under the hood"
+- "Everything in this tutorial should be done using only the ```Efficiency.C``` file. The **check out** sections are only for you to see what's going on under the hood"
 - "Documentation available [here](https://github.com/AthomsG/LIP_INTERNSHIP/blob/master/Documentation.md)"
 ---
 
