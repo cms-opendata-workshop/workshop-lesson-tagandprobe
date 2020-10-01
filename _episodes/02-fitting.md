@@ -166,14 +166,14 @@ We'll start by choosing the desired bins for the transverse momentum. If you're 
 
 > ## Bin Suggestion
 > ~~~
->//double bins[] = {2, 3.4, 4, 4.2, 4.4, 4.7, 5.0, 5.1, 5.2, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.2, 6.4, 6.6, 6.8, 7.3, 9.5, 13.0, 17.0, 40};
-> //int bin_n = 23;       //-- BINS USED TO CALCULATE PT
+> double bins[] = {2, 3.4, 4, 4.2, 4.4, 4.7, 5.0, 5.1, 5.2, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.2, 6.4, 6.6, 6.8, 7.3, 9.5, 13.0, 17.0, 40};
+> int bin_n = 23;       //-- BINS USED TO CALCULATE PT
 >
->//double bins[] = {-3, -2.8, -2.6, -2.4, -2.2, -2.0, -1.8, -1.6, -1.4, -1.2, -1.0, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.5, 0.6, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0};
-> //int bin_n = 30;       //-- BINS USED TO CALCULATE PHI
+> double bins[] = {-3, -2.8, -2.6, -2.4, -2.2, -2.0, -1.8, -1.6, -1.4, -1.2, -1.0, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.5, 0.6, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0};
+> int bin_n = 30;       //-- BINS USED TO CALCULATE PHI
 >    
->//double bins[] = {-2.0, -1.9, -1.8, -1.7, -1.6, -1.5, -1.4, -1.2, -1.0, -0.8, -0.6, -0.4, 0, 0.2, 0.4, 0.6, 0.7, 0.95, 1.2, 1.4, 1.5, 1.6, 2.0};
-> //int bin_n = 23;       -- BINS USED TO CALCULATE ETA
+> double bins[] = {-2.0, -1.9, -1.8, -1.7, -1.6, -1.5, -1.4, -1.2, -1.0, -0.8, -0.6, -0.4, 0, 0.2, 0.4, 0.6, 0.7, 0.95, 1.2, 1.4, 1.5, 1.6, 2.0};
+> int bin_n = 23;       //-- BINS USED TO CALCULATE ETA
 > ~~~
 > {: .language-cpp}
 >
@@ -189,13 +189,13 @@ or use the suggested values
 > ## Suggestion for the Initial Values
 >Try the following initial values:
 > 
-><ul>
-><li>init_conditions[0] = 9.46030;</li>
-><li>init_conditions[1] = 10.02326;</li>
-><li>init_conditions[2] = 10.3552;</li>
-><li>init_conditions[3] = 0.08;</li>
-></ul>
->
+> ~~~
+> init_conditions[0] = 9.46030;
+> init_conditions[1] = 10.02326;
+> init_conditions[2] = 10.3552;
+> init_conditions[3] = 0.08;
+> ~~~
+> {: .language-cpp}
 > 
 {: .solution}
 
