@@ -8,7 +8,6 @@ questions:
 objectives:
 - "Understand the fitting method, it's advantages and disadvantages"
 - "Learn how to implement this method using ROOT library for c++"
-
 keypoints:
 - "The dataset for this tutorial contemplates one Muon Id (Tracker Muon) and further contains the three kinematic variables (pT, Eta, Phi)"
 - "Everything in this tutorial should be done using only the ```Efficiency.C``` file. The "**check out** sections" are only for you to see what's going on under the hood"
