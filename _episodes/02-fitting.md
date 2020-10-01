@@ -532,6 +532,17 @@ You should get something like the following result. If everything went well and 
 
 <img width="500px" src="../fig/Efficiency_thomas.png">
 
+> ## Important note!
+>
+> Don't forget to comment line:68
+>~~~
+>compare_efficiency(quantity, "Efficiency Result/" + quantity + "/Efficiency_MC.root", "Efficiency Result/" + quantity + "/Efficiency_Run2011.root");
+>~~~
+>{: .language-cpp}
+> 
+>when repeating procedure for other quantities.
+{: .callout}
+
 > ## Extra challenge
 >
 > Fancy some more work? download [this](https://drive.google.com/drive/folders/1YytJ7iTVYToUZemYIDLqr13wTjIYGERP?usp=sharing) J/ψ dataset and try out the new methods you just learned!
