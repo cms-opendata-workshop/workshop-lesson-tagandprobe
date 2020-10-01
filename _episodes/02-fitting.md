@@ -14,6 +14,7 @@ keypoints:
 - "Everything in this tutorial should be done using only the ```Efficiency.C``` file. The "**check out** sections" are only for you to see what's going on under the hood"
 - "Documentation available [here](https://github.com/AthomsG/LIP_INTERNSHIP/blob/master/Documentation.md)"
 ---
+
 ## Prerequisite
 
 To prepare for this tutorial, clone the respective github repository to the directory you've created for this lesson by typing the following command on your terminal:
