@@ -330,8 +330,8 @@ As we intend to compare the results between data and simulation, but also betwee
 //Variable bin for pT
 if (strcmp(quantityName, "Pt") == 0)
 {
-	double xbins[] = {2, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.2, 6.4, 6.6, 6.8, 7.3, 7.6, 8.0, 8.5, 9.0, 10.0, 11.0, 13.0, 17.0, 50.0};
-	int nbins = 43;
+	double xbins[] = {2., 3.4, 4, 4.2, 4.4, 4.7, 5.0, 5.1, 5.2, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.2, 6.4, 6.6, 6.8, 7.3, 9.5, 13.0, 17.0, 40.};
+	int nbins = 23;
 
 	histo = new TH1D(hName.data(), hTitle.data(), nbins, xbins);
 }
